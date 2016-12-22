@@ -1,8 +1,15 @@
 language: python
 python:
-  - "2.7"
+- '2.7'
+env:
+  global:
+    secure: UIAZe5OzfS9/yySv/5b5LMWruJaSB3478X1wZnmfmDGrZgQwz/NE9sfuxaLa88gBcqKSwqJCbbR2K8qwzoB/wup2FcLAwfBmevvYZ8Kw1nTv+tq7PZHz+eMvoKD0LIRgBQUFH2H9MyQ71GopBK9GEaO18NLAKG+cijNjqHA/x6nlwr7w6PxvWU8uFhLPp8ycJBgBS/igRcCKSVPikJsX8XJhTuLfQQ9e+CmGOAXn027RhXEYvY2sxIM9ouNbPqMqUeTQYelM0HjM9NuSvG9i3SryWeP9ixkPqma3qFqXB3yDbR1cTU/CBejlqz6W+0cg9xBt3ab21mSiPMNc0+FVNBmzcK29nIGwkGyqddpfHn38KzJsOxQQE/CwNYSphumILk/6zOpV9bYaIEAkLtLIyLoVktvY28XME++tFae6QSM4w+WsGh8ZGpMTAETqasL99woOgv5O4yCYemLSqSRxIFUnXY0yXz8xxeHcwFu3TQCSAx7C8/iqmlsegejAi3DfOOQY0t0TvvO6MTiqwbiyD6SUtC9QWDFxC5SAkDbH3/z31Ooxs4ahDrsWNHIFYSey+LwX7XE2JpmQxMq4AlWl8cHxvAbC7mVX5TPHjNCdYKham7CT9Xo61yn/S0PY+ZqhtCXROgj89DwK29lG8dPqhg/2hc82DoMskLJLqjD5fr8=
+services:
+- elasticsearch
+before_script:
+- sleep 10
 install:
-    - pip install -r requirements_test.txt -t lib_tests
+- pip install -r requirements_test.txt -t lib_tests
 script:
 - python --version
 - nosetests -v --nocapture --nologcapture tests
