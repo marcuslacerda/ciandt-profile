@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    {% include 'swagger-ui-css.html' %}
+    {% include 'swagger-ui-libs.html' %}
+    <script type="text/javascript">
+        $(function () {
+            window.swaggerUi = new SwaggerUi({
+                url: "{{ specs_url }}",
+                validatorUrl: "{{ config.SWAGGER_VALIDATOR_URL }}" || null,
+                dom_id: "swagger-ui-container",
+                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                onComplete: function(swaggerApi, swaggerUi){
+                    if(typeof initOAuth == "function") {
+                        {% if config.SWAGGER_UI_OAUTH_CLIENT_ID -%}
+                        alert('config oauth')
+                            initOAuth({
+                                clientId: "{{ config.SWAGGER_UI_OAUTH_CLIENT_ID }}",
+                                realm: "{{ config.SWAGGER_UI_OAUTH_REALM }}",
+                                appName: "{{ config.SWAGGER_UI_OAUTH_APP_NAME }}"
+                            });
+                        {%- endif %}
+                    }
+                    $('pre code').each(function(i, e) {
+                        hljs.highlightBlock(e)
+                    });
+                },
+                onFailure: function(data) {
+                    log("Unable to Load SwaggerUI");
+                },
+                jsonEditor: {{ config.SWAGGER_UI_JSONEDITOR | default(False) | string | lower }},
+                docExpansion: "{{ config.SWAGGER_UI_DOC_EXPANSION | default('none') }}"
+            });
+
+            window.swaggerUi.load();
+
+            // add clientAuthorizations when  access_code input is updated
+            $('#auth_input').change(function() {
+              var key = $('#auth_input')[0].value
+              if(key && key.trim() != "") {
+                swaggerUi.api.clientAuthorizations.add("oauth2", new SwaggerClient.ApiKeyAuthorization("Authorization", "Bearer " + key, "header"));
+              }
+            });
+        });
+
+    </script>
+    <style>
+
+      #api-auth-session {
+        padding-top: 10px;
+        width: 960px;
+        margin: 0 auto;
+      }
+
+      #auth_input {
+            height: 20px;
+            font-size: 14px;
+      }
+
+    </style>
+</head>
+
+<body class="swagger-section">
+    <div id="header">
+        <div class="swagger-ui-wrap">
+            <a id="logo"><span class="logo__title">CI&T OPEN API - DOCUMENTATION V1</span></a>
+        </div>
+    </div>
+    <div id="api-auth-session">
+      <form id="auth_form">
+          <div id="auth_container"></div>
+          <span>Put here your oauth Authorization code </span>
+          <br/>
+          <input name="auth_input" id="auth_input" placeholder="oauth access_token" size="100"/>
+      </form>
+    </div>
+    <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
+    <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+</body>
+
+</html>

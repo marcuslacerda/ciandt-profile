@@ -1,0 +1,93 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button"  aria-label="Menu" >
+      <img class="logo" src="assets/icon/logo_black.png" >
+    </md-button>
+    <h3>
+      <a href="/#/stacks">Profile</a>
+    </h3>
+    <span flex></span>
+    <section ng-controller="AuthController">
+      <md-menu md-position-mode="target-left target" ng-if="isAuthenticated()">
+        <md-button aria-label="Open demo menu" class="md-icon-button" style="height: 60px!important; width: 60px!important" ng-click="$mdOpenMenu($event)">
+          <img src="[[user.picture]]" class="avatar">
+        </md-button>
+
+        <md-menu-content width="4" >
+          <!--
+          <md-menu-item>
+            <md-button ng-href="/#/profile">
+                <div layout="row" flex>
+                  <p flex>Profile</p>
+                  <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                </div>
+            </md-button>
+          </md-menu-item>
+          -->
+          <md-menu-item>
+            <md-button ng-click="logout()">
+                <div layout="row" flex>
+                  <p flex>Logout</p>
+                  <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                </div>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </section>
+
+  </div>
+</md-toolbar>
+
+<div layout="column" ng-controller="AuthController">
+  <div layout="row" style="height: 200px" layout-align="center center">
+    <div layout="row" hide-xs flex="70" layout-align="center center">
+      <span class="md-display-3"></span>
+    </div>
+    <div flex>
+      <div layout="column" layout-align="center center" ng-if="!isAuthenticated()">
+        <h1 class="md-title">Log in to Profile with</h1>
+        <div layout="row">
+          <img style="width: 36; height: 36; padding: 6px" src="assets/icon/google-icon-128.png" alt="Google">
+          <md-button class="md-primary md-raised md-hue-2" ng-click="authenticate('google')">Google Account</md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="HomeController as ctrl" layout="column" ng-cloak>
+    <md-content layout-padding layout="column">
+      <form ng-submit="$event.preventDefault()">
+        <p>Use <code>&lt;md-autocomplete&gt;</code> with custom templates to show styled autocomplete results.</p>
+        <md-autocomplete
+            ng-disabled="ctrl.isDisabled"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.name"
+            md-min-length="0"
+            placeholder="Pick an Angular repository"
+            md-menu-class="autocomplete-custom-template">
+          <md-item-template>
+            <span class="item-title">
+              <md-icon>search</md-icon>
+              <span> {{item.name}} </span>
+            </span>
+            <span class="item-metadata">
+              <span class="item-metastat">
+                <strong>{{item.watchers}}</strong> watchers
+              </span>
+              <span class="item-metastat">
+                <strong>{{item.forks}}</strong> forks
+              </span>
+            </span>
+          </md-item-template>
+        </md-autocomplete>
+      </form>
+    </md-content>
+  </div>
+
+</div>

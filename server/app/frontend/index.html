@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile</title>
+  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png?v=2">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="assets/css/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/loading-bar.min.css">
+
+  <link type="text/css" rel="stylesheet" href="assets/css/style.css" media="screen,projection"/>
+</head>
+<body ng-app="StarterApp" ng-cloak>
+
+  <div layout="column" class="relative" layout-fill role="main" >
+
+    <!-- ui-routes - SPA -->
+    <div ui-view></div>
+
+  </div>
+
+  <!-- Angular Material requires Angular.js Libraries version 1.5.5-->
+  <script src="assets/vendor/angular.min.js"></script>
+  <script src="assets/vendor/angular-resource.js"></script>
+  <script src="assets/vendor/angular-animate.min.js"></script>
+  <script src="assets/vendor/angular-arial.min.js"></script>
+  <script src="assets/vendor/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library version 1.1.0-->
+  <script src="assets/vendor/angular-material.min.js"></script>
+
+  <!-- Add angular module -->
+  <script src="assets/vendor/angular-material-icons.min.js"></script>
+  <script src="assets/vendor/angular-ui-router.js"></script>
+  <script src="assets/vendor/satellizer.min.js"></script>
+  <script src="assets/vendor/loading-bar.min.js"></script>
+
+  <!-- google analytics module -->
+  <script src="assets/vendor/angular-google-analytics.min.js"></script>
+
+  <!-- Your application bootstrap  -->
+  <script src="app/app.js" > </script>
+  <script src="app/controllers/auth.controller.js" > </script>
+  <script src="app/controllers/home.controller.js" > </script>
+  <script src="app/controllers/profile.controller.js" > </script>
+
+  <script src="app/interceptors/auth.interceptor.js" > </script>
+  <script src="app/services/account.js" > </script>
+
+</body>
+</html>

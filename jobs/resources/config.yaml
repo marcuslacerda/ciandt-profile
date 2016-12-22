@@ -1,0 +1,11 @@
+people:
+  people:
+    host: https://people.cit.com.br
+    user:
+    pass:
+  gateway:
+    host: https://wsgateway.cit.com.br
+    app_token:
+
+profile:
+  endpoint: http://localhost:5000/api

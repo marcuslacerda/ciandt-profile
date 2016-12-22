@@ -1,0 +1,4 @@
+requests
+httplib2
+elasticsearch
+PyJWT

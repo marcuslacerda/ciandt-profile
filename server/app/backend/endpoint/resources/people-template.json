@@ -1,0 +1,51 @@
+{
+    "order": 0,
+    "template": "people",
+    "settings": {
+      "index": {
+        "refresh_interval": "5s",
+        "analysis": {
+          "analyzer": {
+            "default": {
+              "type": "standard",
+              "stopwords": "_none_"
+            }
+          }
+        },
+        "number_of_shards": "1",
+        "number_of_replicas": "1"
+      }
+    },
+    "mappings": {
+      "_default_": {
+        "dynamic_templates": [
+          {
+            "string_fields": {
+              "mapping": {
+                "fields": {
+                  "{name}": {
+                    "index": "analyzed",
+                    "omit_norms": true,
+                    "type": "string"
+                  },
+                  "raw": {
+                    "analyzer": "keyword",
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "multi_field"
+              },
+              "match_mapping_type": "string",
+              "match": "*"
+            }
+          }
+        ],
+        "_all": {
+          "enabled": true
+        }
+      }
+    },
+    "aliases": {}
+}

@@ -1,0 +1,61 @@
+.selected {
+  color:#F12938!important
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+.badge1 {
+   position:relative;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    outline:none;
+}
+
+
+#loading-bar .bar {
+  background: black;
+  z-index: 10;
+}
+#loading-bar-spinner .spinner-icon {
+  border-top-color:  black;
+  border-left-color: gray;
+}
+#loading-bar-spinner {
+  top: 70px;
+  left: 97%;
+}
+
+md-toast.error .md-toast-content {
+  background-color: red;
+}
+
+.avatar {
+  border-radius: 99%;
+  width: 48px;
+  height: 48px
+}
+
+
+.autocomplete-custom-template li {
+  border-bottom: 1px solid #ccc;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  white-space: normal; }
+
+.autocomplete-custom-template li:last-child {
+  border-bottom-width: 0; }
+
+.autocomplete-custom-template .item-title,
+.autocomplete-custom-template .item-metadata {
+  display: block;
+  line-height: 2; }
+
+.autocomplete-custom-template .item-title md-icon {
+  height: 18px;
+  width: 18px; }
