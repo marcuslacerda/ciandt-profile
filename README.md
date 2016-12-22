@@ -21,8 +21,7 @@ $ docker-compose up
 If you want a full local enviroment, you will need to start [elasticsearch] and define ELASTICSEARCH_URL environment.
 
 ```console
-$ run docker image elasticsearch
-$ run docker image job scheduler (rundeck)
+$ docker run -p 9200:9200 elasticsearch:2.4.3
 ```
 
 You can override this endpoint using this variables
