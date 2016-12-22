@@ -1,1 +1,8 @@
+flask
+flask-restplus
+requests
+httplib2
+elasticsearch
+python-dotenv
+PyJWT
 mock==2.0.0
