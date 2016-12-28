@@ -6,7 +6,7 @@ import json
 from requests.auth import HTTPBasicAuth
 from lxml import html
 
-logger = logging.getLogger('stack')
+logger = logging.getLogger('profile')
 
 
 class People(object):

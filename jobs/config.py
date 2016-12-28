@@ -17,11 +17,14 @@ if os.path.exists(dotenv_path):
 class Config(object):
     """Operations for configuration class."""
 
-    def __init__(self, resource_path=None):
+    def __init__(self, resource_path=None, override=True):
         """Initializing config dictionary."""
         self.original_config = load_config(resource_path)
         self.override_config = {}
-        override_config(None, self.original_config, self.override_config)
+        if override:
+            override_config(None, self.original_config, self.override_config)
+        else:
+            self.override_config = self.original_config
 
     def get(self, key):
         """Return value for key."""

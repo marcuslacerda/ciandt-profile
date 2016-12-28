@@ -2,9 +2,9 @@
 import logging
 from utils import database
 
-logger = logging.getLogger('stack')
-index = 'coach'
-doc_type = 'login'
+logger = logging.getLogger('profile')
+index = 'people'
+doc_type = 'detail'
 
 
 class Coach(object):

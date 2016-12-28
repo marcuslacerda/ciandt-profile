@@ -46,13 +46,17 @@ nosetests -v --with-cover --cover-html --cover-package=. tests/
 ```
 A detailed report from coverage can be found at cover folder in project's path.
 
+## Production Setup
+* Elasticsearch credentials is stored as /server/nginx/.htpasswd file. Change default value using htpasswd command
 
+```console
+$ htpasswd -c nginx/.htpasswd admin
+```
 
 ## Continuous Delivery
 This scaffolding uses a Travis CI for continous build, test and delivery a package on google cloud platform.
 See more detail by reading this article
 https://cloud.google.com/solutions/continuous-delivery-with-travis-ci
-
 
 
 ## Contributing

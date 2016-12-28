@@ -40,7 +40,7 @@ class Repository(object):
             logger.debug("Template %s created" % response['acknowledged'])
 
     def search_by_query(self,  query):
-        data = self.es.search(index='people', body=query, size=2500)
+        data = self.es.search(index='people', doc_type='profile', body=query, size=2500)
 
         list_data = []
         for item in data['hits']['hits']:
@@ -48,14 +48,14 @@ class Repository(object):
         return list_data
 
     def get_by_login(self, login):
-        item = self.es.get(index='people', doc_type='login', id=login)
+        item = self.es.get(index='people', doc_type='profile', id=login)
         return item['_source']
 
     def delete_by_login(self, login):
-        return self.es.delete(index='people', doc_type='login', id=login)
+        return self.es.delete(index='people', doc_type='profile', id=login)
 
     def insert(self, login, document):
-        res = self.es.index(index='people', doc_type='login', body=document, id=login)
+        res = self.es.index(index='people', doc_type='profile', body=document, id=login)
         logger.debug("Created documento ID %s" % res['_id'])
 
         return res
