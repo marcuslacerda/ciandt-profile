@@ -1,0 +1,25 @@
+<joblist>
+  <job>
+    <description></description>
+    <executionEnabled>true</executionEnabled>
+    <id>edfc5058-6aef-4fd3-ae5c-db53f71331fc</id>
+    <loglevel>INFO</loglevel>
+    <name>Load Profile Information</name>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>clone scripts</description>
+        <exec>rm -rf profile &amp;&amp; git clone https://github.com/marcuslacerda/profile.git</exec>
+      </command>
+      <command>
+        <description>script load people</description>
+        <script><![CDATA[cd profile/jobs
+echo "======= STARTING SCRIPT ======="
+python -u script_load_profile.py --logging_level INFO
+echo "======= SCRIPT FINISHED ======="]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>edfc5058-6aef-4fd3-ae5c-db53f71331fc</uuid>
+  </job>
+</joblist>

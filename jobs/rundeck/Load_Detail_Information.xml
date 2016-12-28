@@ -1,0 +1,25 @@
+<joblist>
+  <job>
+    <description>Load coach and pdm data</description>
+    <executionEnabled>true</executionEnabled>
+    <id>bbb77414-fc0d-4db9-bcbb-9238ee5db5db</id>
+    <loglevel>INFO</loglevel>
+    <name>Load Detail Information</name>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>clone scripts</description>
+        <exec>rm -rf profile &amp;&amp; git clone https://github.com/marcuslacerda/profile.git</exec>
+      </command>
+      <command>
+        <description>script load coach</description>
+        <script><![CDATA[cd profile/jobs
+echo "======= STARTING SCRIPT ======="
+python -u script_load_detail.py --logging_level INFO
+echo "======= SCRIPT FINISHED ======="]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>bbb77414-fc0d-4db9-bcbb-9238ee5db5db</uuid>
+  </job>
+</joblist>
