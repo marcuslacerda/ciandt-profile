@@ -77,19 +77,34 @@ class People(object):
         """Find coach by login."""
         people = self.find_user_by_login(login)
 
+        if not people:
+            logger.warning("people %s was not found" % login)
+            return None
+
+        # index 5 is a coach login
         coach = people[5]
-        if coach:
-            return self.find_user_by_login(coach)
-        return None
+        if not coach:
+            logger.warning("%s has no coach" % login)
+            return None
+
+        return self.find_user_by_login(coach)
+
 
     def find_pdm_by_login(self, login):
         """Find pdm by login."""
         people = self.find_user_by_login(login)
 
+        if not people:
+            logger.warning("people %s was not found" % login)
+            return None
+
+        # index 6 is a pdm login
         pdm = people[6]
-        if pdm:
-            return self.find_user_by_login(pdm)
-        return None
+        if not pdm:
+            logger.warning("%s has no pdm" % login)
+            return None
+
+        return self.find_user_by_login(pdm)
 
     def find_all_users(self):
         """Return all ative users from people system.
