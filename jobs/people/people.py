@@ -6,7 +6,7 @@ import json
 from requests.auth import HTTPBasicAuth
 from lxml import html
 
-logger = logging.getLogger('profile')
+logger = logging.getLogger('stack')
 
 
 class People(object):
@@ -35,6 +35,8 @@ class People(object):
         url = '%s/profile/%s' % (self.people_host, login)
         response = requests.get(url=url, auth=HTTPBasicAuth(self.username, self.password))
 
+        logger.debug('user %s and pass %s' % (self.username, self.password))
+
         # Response
         if response.status_code != 200:
             logger.error("fail to load project name for %s. Check people username and password" % login)
@@ -62,41 +64,40 @@ class People(object):
         logger.debug(url)
         if response.status_code != 200:
             logger.error("fail to load project name for %s. Check people username and password" % login)
-            return "Empty"
+            return None
 
         json_data = json.loads(response.text)
 
-        return json_data['data'][0]
+        if json_data['data']:
+            return json_data['data'][0]
+        else:
+            return None
 
     def find_coach_by_login(self, login):
         """Find coach by login."""
-
-        people = self.find_user(login)
+        people = self.find_user_by_login(login)
 
         coach = people[5]
         if coach:
-            return self.find_user(coach)
-            return None
-
+            return self.find_user_by_login(coach)
+        return None
 
     def find_pdm_by_login(self, login):
         """Find pdm by login."""
-
-        people = self.find_user(login)
+        people = self.find_user_by_login(login)
 
         pdm = people[6]
         if pdm:
-            return self.find_user(pdm)
-            return None
+            return self.find_user_by_login(pdm)
+        return None
 
-    def find_users(self):
+    def find_all_users(self):
         """Return all ative users from people system.
 
         Needs config['PEOPLE_GATEWAY_APP_TOKEN'] to call people URL. app_token:
         it is a token form api gateway. You need to request one for you
         if you want call this API.
         """
-
         token = self.config.get('PEOPLE_GATEWAY_APP_TOKEN')
         headers = {'app_token': token}
 

@@ -15,7 +15,7 @@ class ProfileApiTestCase(unittest.TestCase):
             'ELASTICSEARCH_URL': 'http://localhost:9200',
             'ELASTICSEARCH_USER': ''
         })
-        repository.insert(build_juliana())
+        repository.insert(build_mock_people("mlacerda"))
 
     def tearDown(self):
         """Destroy settings created for tests."""
@@ -47,9 +47,9 @@ class ProfileApiTestCase(unittest.TestCase):
         self.assertEquals(user['role']['name'], 'Developer')
 
 
-def build_juliana():
+def build_mock_people(login):
     doc = {
-        "login": "mlacerda",
+        "login": login,
         "name": "MARCUS VINICIUS DE OLIVEIRA LACERDA",
         "area": {
           "code": 20,
@@ -75,8 +75,3 @@ def build_juliana():
     }
 
     return doc
-
-
-
-if __name__ == '__main__':
-    unittest.main()

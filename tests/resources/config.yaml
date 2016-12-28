@@ -1,0 +1,24 @@
+people:
+  people:
+    host: https://people.cit.com.br
+    user:
+    pass:
+  gateway:
+    host: https://wsgateway.cit.com.br
+    app_token: Blpy2nNXnjya
+
+profile:
+  elasticsearch:
+    host: http://localhost:9202
+    user:
+    pass:
+
+techgallery:
+  endpoint: https://tech-gallery.appspot.com/_ah/api/rest/v1
+
+knowledgemap:
+  flags:
+  elasticsearch:
+    host: http://localhost:9201
+    user:
+    pass:

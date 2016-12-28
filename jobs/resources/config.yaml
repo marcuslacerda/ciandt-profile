@@ -8,4 +8,7 @@ people:
     app_token:
 
 profile:
-  endpoint: http://localhost:5000/api
+  elasticsearch:
+    host: http://localhost:9200
+    user:
+    pass:

@@ -1,4 +1,5 @@
+google-api-python-client
 requests
 httplib2
 elasticsearch
-PyJWT
+python-dotenv

@@ -1,7 +1,7 @@
 version: '2'
 services:
     people-elasticsearch:
-        image: elasticsearch:2.4.2
+        image: elasticsearch:2.4.3
         # ports:
         #     - "9200:9200"
         #     - "9300:9300"

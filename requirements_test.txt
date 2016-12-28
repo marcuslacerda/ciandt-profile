@@ -5,4 +5,5 @@ httplib2
 elasticsearch
 python-dotenv
 PyJWT
+PyYAML
 mock==2.0.0

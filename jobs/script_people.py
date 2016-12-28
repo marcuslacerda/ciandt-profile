@@ -1,25 +1,35 @@
-import logging
-import os
+"""Script load people."""
 from config import Config
 from datetime import datetime
 from people import People
-from profile import Profile
+from people import Profile
+from utils import logger_builder
 
-FORMAT = '%(name)s %(levelname)-5s %(message)s'
-logging.basicConfig(format=FORMAT)
-logger = logging.getLogger('profile')
-logger.addHandler(logging.NullHandler())
-logger.setLevel(logging.DEBUG)
-logging.getLogger('elasticsearch').setLevel(logging.ERROR)
+try:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--logging_level', default='ERROR',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+        help='Set the logging level of detail.')
+    flags = parser.parse_args()
+    args = vars(flags)
+except ImportError:
+    flags = None
 
 config = Config()
 people = People(config)
 profile = Profile(config)
 
+logging_level = args['logging_level'] or 'ERROR'
+logger = logger_builder.initLogger(logging_level)
+
+
 def load_people():
+    """Get all login from people API and save on elasticsearch database."""
     count = 0
 
-    for hit in people.find_users():
+    for hit in people.find_all_users():
         count += 1
         logger.info("Loading %s - %s  " % (hit['login'], count))
         project = people.find_project_by_user(hit['login'])
@@ -42,22 +52,9 @@ def load_people():
                'company': hit['company']
         }
 
-        logger.info('Inserting people %s' % hit['login'])
+        logger.debug('Inserting people %s' % hit['login'])
 
-        profile.save(hit['login'], doc)
-
-def load_coach():
-    count = 0
-    for hit in people.find_users():
-        count += 1
-        login = hit['login']
-        logger.info("Loading %s - %s  " % (login, count))
-
-        coach = people.find_coach_by_login(login)
-        pdm = people.find_pdm_by_login(login)
-
-
-
+        profile.save(doc)
 
 if __name__ == '__main__':
 	load_people()
