@@ -13,7 +13,7 @@ services:
 - elasticsearch
 before_script:
 - sleep 10
-- apt-get install -y python-lxml
+- sudo apt-get install -y python-lxml
 install:
 - pip install -r requirements_test.txt -t lib_tests
 script:
