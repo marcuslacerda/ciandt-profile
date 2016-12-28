@@ -16,6 +16,7 @@ before_script:
 - sudo apt-get install -y python-lxml
 install:
 - pip install -r requirements_test.txt -t lib_tests
+- pip install --upgrade pyyaml
 script:
 - python --version
 - nosetests -v --nocapture --nologcapture tests
