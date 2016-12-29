@@ -1,0 +1,19 @@
+version: '2'
+services:
+    people-elasticsearch:
+        image: elasticsearch:2.4.3
+        # ports:
+        #     - "9200:9200"
+        #     - "9300:9300"
+        # #uncomment this section to have elasticsearch data persisted to a volume
+        # volumes:
+        #   - /home/profile/data:/usr/share/elasticsearch/data
+    people-nginx:
+       image: nginx:1.11.8
+       depends_on:
+           - people-elasticsearch
+       ports:
+           - "9202:9200"
+       volumes:
+           - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd
+           - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
