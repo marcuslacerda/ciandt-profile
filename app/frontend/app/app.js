@@ -115,7 +115,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       optionalUrlParams: ['access_type', 'approval_prompt'],
       accessType: 'offline',
       approvalPrompt: 'auto',
-      clientId: '146680675139-6fjea6lbua391tfv4hq36hl7kqo7cr96.apps.googleusercontent.com'
+      clientId: '538169971233-t8dacq4m7sa08j0e84vveenu6k29i1fl.apps.googleusercontent.com'
     });
 
 });

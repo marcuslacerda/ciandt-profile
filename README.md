@@ -58,6 +58,23 @@ This scaffolding uses a Travis CI for continous build, test and delivery a packa
 See more detail by reading this article
 https://cloud.google.com/solutions/continuous-delivery-with-travis-ci
 
+ref: https://cloud.google.com/solutions/continuous-delivery-with-travis-ci
+Create a tar archive file containing both of these credentials. This is important because Travis CI can decrypt only one file. In a terminal window, run the following command:
+
+```
+$ tar -pczf credentials.tar.gz service_account_secret.json .env
+```
+
+In the .travis.yml file, remove the encryption information. This information will be automatically added when you encrypt your keys in the next step. Edit the file and after before_install, remove the follow line:
+```
+openssl aes-256-cbc -K $encrypted_4cb330591e04_key
+```
+
+Encrypt the file locally. If prompted to overwrite the existing file, respond yes. 
+```console
+$ sudo travis encrypt-file credentials.tar.gz --add
+```
+
 
 ## Contributing
 [Pull requests][] are welcome; see the [contributor guidelines][] for details.

@@ -1,0 +1,27 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: ssl
+  version: latest
+
+handlers:
+- url: /.*
+  script: run.app
+
+skip_files:
+- ^.git$
+- ^(.*/)?.*\.py[co]$
+- README.md
+- .gitignore
+- .nvmrc
+- .python-version
+- pylama.ini
+- requirements.txt
+- report.txt
+- ^worker$
+- worker.yaml
+- queue.yaml
+- ^lib_tests$
+- ^tests$

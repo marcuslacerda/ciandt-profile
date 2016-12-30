@@ -1,7 +1,10 @@
-language: python
-python:
-- '2.7'
+# Cache our Gcloud SDK between commands
+cache:
+  directories:
+  - $HOME/google-cloud-sdk/
 env:
+# Make sure gcloud command is on our PATH and the App Engine SDK is in the Python path
+- GAE_PYTHONPATH=${HOME}/.cache/google_appengine PATH=$PATH:${HOME}/google-cloud-sdk/bin PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH} CLOUDSDK_CORE_DISABLE_PROMPTS=1
   global:
   - secure: UIAZe5OzfS9/yySv/5b5LMWruJaSB3478X1wZnmfmDGrZgQwz/NE9sfuxaLa88gBcqKSwqJCbbR2K8qwzoB/wup2FcLAwfBmevvYZ8Kw1nTv+tq7PZHz+eMvoKD0LIRgBQUFH2H9MyQ71GopBK9GEaO18NLAKG+cijNjqHA/x6nlwr7w6PxvWU8uFhLPp8ycJBgBS/igRcCKSVPikJsX8XJhTuLfQQ9e+CmGOAXn027RhXEYvY2sxIM9ouNbPqMqUeTQYelM0HjM9NuSvG9i3SryWeP9ixkPqma3qFqXB3yDbR1cTU/CBejlqz6W+0cg9xBt3ab21mSiPMNc0+FVNBmzcK29nIGwkGyqddpfHn38KzJsOxQQE/CwNYSphumILk/6zOpV9bYaIEAkLtLIyLoVktvY28XME++tFae6QSM4w+WsGh8ZGpMTAETqasL99woOgv5O4yCYemLSqSRxIFUnXY0yXz8xxeHcwFu3TQCSAx7C8/iqmlsegejAi3DfOOQY0t0TvvO6MTiqwbiyD6SUtC9QWDFxC5SAkDbH3/z31Ooxs4ahDrsWNHIFYSey+LwX7XE2JpmQxMq4AlWl8cHxvAbC7mVX5TPHjNCdYKham7CT9Xo61yn/S0PY+ZqhtCXROgj89DwK29lG8dPqhg/2hc82DoMskLJLqjD5fr8=
   - secure: XQeo7VNNlqx+Jv0f14b4I0Dfam6Al8pDHTGo2O1opOK/u6D0b9gwMbu34sxQI2AmKi8tjHJbeYtXavPkJmnASw7uw8uHcRV/sUtCFP6T+1KP7FfPYZObZMtIWIib4Ba1/HeBO6sm1HKfyPAGcsGvAsOP1uGfjgH6T6Bj+O+fSJm8pAPEdr/m3qLZLYr+wKpRjh6hoV3Qptpq4hKMG51lTnc0RgBvMqB+JXuWFg3FKCUxAu/4gzppV0EZK6xAEWsAOilfkOVgeRyFjwrTKxGDjx9SAMHrmSOsKYUILdYQAbgSJ2fEJ9hUHWhmvmZO9KJPWirxZnfLiGA4Bz7EF4NA9yfJmpZqKQdAZRpUdJElOiaYmovaaitul7c5lLFRJH0HnPAVHg8dMNdSKs8VsdpeRD138gKKKkmrK9dfHBrEDrm//kOEOtLnB8NPrXiyNGSfDhw7byZpT6k2XXmK1CSedTeA+0+XYDW704Vjsgi+2ks6LGGF2ZUB70fei0wC7oWzVVgOgTHtt2P2mOW7resrdwKrHbtTxrhmOgWDk6ZjtGNG9faCNH4AaUF5fOigj9YZ7GbGeG7sTRHfw/PsMFP8F6fbF4NVDO0ryrP0iE77VMDPec37e4OLJnFVnjoq3InfqRPwaprUTZlInMXeH2JNOqiwiPksuO0BHcvgKtropJU=
@@ -10,12 +13,40 @@ env:
   - secure: vfvKhcCvVGXTQOV+vL+//k9xzGMJOSivYq/X2tUBCZ7Q6PTEoC1Rdj9I6twZjCoc1s143m/TfcsDBdZ2soklM7+yWo3hMmXrpgAioRnvY3OCZH0GkD3QHGlivPbcymjsYMrxb0EytLLvHvjRYhYfO5JxgDlnOPkXRxIRMh/WYznowpamieKqTCymvTA1glCFvO7+a/FR1AGUGsjjL6i46y8lQegZ+LDiQdOqaDj+hTuG/SPOUQ9eI9QD+LGmVlchngPfCILZbsfzdWGM3pQBwPm65B7JDiPBglk1m99XuW680bnHZFsMdVwDZ1Bi05r0E+FukuzIS87opGJdghlNuh6pRmZZZEeadc2DUh8mLRK+SuylOnBZFmDn7+VlqIUGuMv6SuoDcxD/MJFUZNyyVOhFgMOXTFfregmW2njNcC4Kb+JN8baZupvCArCFqc7xEA5KeqvGYL67QEupwHm2d6tBC2NOQGHScSbXItO8QrwfXNE88wXH6VZzgojd4cFSzOtn+FUbq/C5xGhuy0nc0q6gG1bCYnJaGwz6Ued0utSiMKNBcdmgaq5lfhUT+QmCzqRrM1DDwJ57jdu7m06am5QTDKI3LR8NMa+DF95LXmSXYhcVTADMdNHPLBUn8rFDcRk7DZjRWOMmKI2YuKtxBi865o1F76qDGIKMEPLlxzw=
   - secure: RdQcphLQkiSTkeRC5JWzFPeH4btDMNZLRs0NuIBXyl6npMSZBgeaShDyjoJZU58U31JykcRhEBQcW+n7FEF6fgcK6O2NM6iQ16vZHdhJ2GluWL4BeUI4mjnbusTGzmTp45Le8Nyd2fiwZ0wbPn2yHbWqK1KZRc4M0bWSSdV+gUoVPWYEQdWLmMATtCQ/8A8JHI0QMwiD3P1JvKjuUWaHwjYLwXE718Zex/enxR9sunWvSXnSzYpT81554fSZzfzLjqmPSbyfHvo6YNDKPM4mV+IyKi8c/5xKsE8vgWwhILY/T9bXSAHaEkAdfzHdZ8X9zwzR4ELhyF4/9+nSTETDgqkrzm8+JKzLZKwditJOlSsPq1ObPeuleJ6bAL6MepnxZOT7guuSw610C6L3B1nCLXXPttN6f3Y6ge2Rs4W6oHmb3uY7kMAEUVkKn1YrZv96zvrXGufpFbJlBtmHmAvSLuorL6LkBZZYM2VjxyRaBusVlRtT83Owpe4WbMMiDw6mKVsAJJhRKzVYY2qgG68Xdeu7uLo83IClIgb5TEIaLOgKfV7JHQbCF/GJVJpyjyQjLsPE5/WC+sHAwkHNWVKi1O84qdME+2d4BqJ9eOb/7OZaB7LNnEXrP9rSq8Ofyzx9WFeTyo/BOAejp4xls+kJE46BLNisfrb73ko0r2eP8YM=
 services:
+# Start elasticsearch server on 9200 port to unittest
 - elasticsearch
-before_script:
-- sleep 10
+before_install:
+# Install Google App Engine Python SDK
+- if [ ! -d "${GAE_PYTHONPATH}" ]; then
+    python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
+  fi
+# If the SDK is not already cached, download it and unpack it
+- if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+# Add gcloud to $PATH
+- source /home/travis/google-cloud-sdk/path.bash.inc
+# Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
+- openssl aes-256-cbc -K $encrypted_496d8ec6abbd_key -iv $encrypted_496d8ec6abbd_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
+- tar -xzf credentials.tar.gz
+# Env file was stored on credentials.tar.gz.enc. We need to move it for app/ directory
+- mv .env app/
+# Here we use the decrypted service account credentials to authenticate the command line tool
+- gcloud auth activate-service-account --key-file service_account_secret.json
 install:
+# Install the Python dependencies for unittest and app
 - pip install -r requirements_test.txt -t lib_tests
 - pip install --upgrade lxml
+- pip install -r app/requirements.txt -t app/lib/
+# Set the correct project to deploy to
+- gcloud config set project people-ciandt
+- gcloud -q components update gae-python
+before_script:
+- sleep 10
 script:
+# print tool versions for debug
+- gcloud version
 - python --version
+# Run the unit tests
 - nosetests -v --nocapture --nologcapture tests
+# Deploy the app
+- cd app/
+- gcloud app deploy -v production --promote --verbosity=info

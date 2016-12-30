@@ -3,6 +3,7 @@ from elasticsearch import Elasticsearch
 import logging
 import os
 import json
+from connection import UrlFetchAppEngine
 
 logger = logging.getLogger('profile')
 
@@ -17,9 +18,14 @@ class Repository(object):
                 [config['ELASTICSEARCH_URL']],
                 http_auth=(
                     config['ELASTICSEARCH_USER'],
-                    config['ELASTICSEARCH_PASS']))
+                    config['ELASTICSEARCH_PASS']),
+                connection_class=UrlFetchAppEngine,
+                send_get_body_as='POST')
         else:
-            self.es = Elasticsearch([config['ELASTICSEARCH_URL']])
+            self.es = Elasticsearch(
+                [config['ELASTICSEARCH_URL']],
+                connection_class=UrlFetchAppEngine,
+                send_get_body_as='POST')
 
     def create_template_if_notexits(self):
         """If template doesn't exists, create one from json file definition.

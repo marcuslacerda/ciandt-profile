@@ -1,7 +1,0 @@
-flask
-flask-restplus
-requests
-httplib2
-elasticsearch
-python-dotenv
-PyJWT

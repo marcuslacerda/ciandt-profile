@@ -10,8 +10,11 @@ __pycache__/
 .sass-cache
 venv
 
-# Tests
+# libs
 lib_tests
+lib
 
-#  dotenv
+# credentials
 .env
+*_secret.json
+credentials.tar.gz

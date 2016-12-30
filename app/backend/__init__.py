@@ -7,13 +7,11 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 
-mode = sys.argv[1] if len(sys.argv) == 2 else 'development'
 
 current_path = os.path.dirname(__file__)
 template_path = os.path.abspath(os.path.join(current_path, 'swagger_templates'))
 client_path = os.path.abspath(os.path.join(current_path, '..', 'frontend'))
 dotenv_path = os.path.abspath(os.path.join(current_path, '..', '.env'))
-config_json_path = os.path.abspath(os.path.join(current_path, '%s.json' % mode))
 load_dotenv(dotenv_path)
 
 app = Flask(
@@ -26,6 +24,8 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 ################
 #### config ####
 ################
+mode = util.get_environ(app.config, 'MODE', 'development')
+config_json_path = os.path.abspath(os.path.join(current_path, '%s.json' % mode))
 app.config.from_json(config_json_path)
 app.config['GOOGLE_CLIENT_SECRET'] = util.get_environ(app.config, 'GOOGLE_CLIENT_SECRET')
 app.config['GOOGLE_CLIENT_ID'] = util.get_environ(app.config, 'GOOGLE_CLIENT_ID')
