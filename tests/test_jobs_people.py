@@ -32,9 +32,8 @@ class PeopleTestCase(unittest.TestCase):
         user = self.people.find_project_by_user(login)
         self.assertEquals('Empty', user)
 
-    # TODO: fix pip install for lxml not work when running on travis-ci
-    # def test_valid_login_has_project_not_empty(self):
-    #     """People: valid login has project not empty."""
-    #     login = 'mlacerda'
-    #     project = self.people.find_project_by_user(login)
-    #     self.assertIsNotNone(project)
+    def test_valid_login_has_project_not_empty(self):
+        """People: valid login has project not empty."""
+        login = 'mlacerda'
+        project = self.people.find_project_by_user(login)
+        self.assertIsNotNone(project)
