@@ -18,6 +18,7 @@ class PeopleTestCase(unittest.TestCase):
         """People: find user by login."""
         login = 'mlacerda'
         result = self.people.find_user_by_login(login)
+        self.assertIsNotNone(result, 'Result must be a valid people')
         self.assertEquals(login, result[1])
 
     def test_invalid_login_return_none(self):

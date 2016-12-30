@@ -5,6 +5,7 @@ import os
 import logging
 
 logger = logging.getLogger('stack')
+# used to tell if execution from travis-ci. Problably, it is a unittest call
 travis = os.environ.get('TRAVIS')
 
 try:
@@ -21,7 +22,6 @@ def initEs(host, user, password):
 
     If user was defined, then the http_auth connection will be created.
     """
-
     if not URLFETCH_AVAILABLE or travis:
         connection_class = Urllib3HttpConnection
     else:

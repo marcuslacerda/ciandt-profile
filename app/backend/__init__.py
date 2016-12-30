@@ -7,15 +7,16 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 
-
 current_path = os.path.dirname(__file__)
 template_path = os.path.abspath(os.path.join(current_path, 'swagger_templates'))
 client_path = os.path.abspath(os.path.join(current_path, '..', 'frontend'))
 dotenv_path = os.path.abspath(os.path.join(current_path, '..', '.env'))
 load_dotenv(dotenv_path)
 
+APP_NAME = 'profile'
+
 app = Flask(
-    'stack',
+    APP_NAME,
     template_folder=template_path,
     static_url_path='',
     static_folder=client_path)

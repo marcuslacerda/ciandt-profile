@@ -5,6 +5,12 @@
     <id>edfc5058-6aef-4fd3-ae5c-db53f71331fc</id>
     <loglevel>INFO</loglevel>
     <name>Load Profile Information</name>
+    <schedule>
+      <month month='*' />
+      <time hour='01' minute='00' seconds='0' />
+      <weekday day='*' />
+      <year year='*' />
+    </schedule>
     <scheduleEnabled>true</scheduleEnabled>
     <sequence keepgoing='false' strategy='node-first'>
       <command>

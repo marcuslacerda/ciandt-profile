@@ -5,6 +5,12 @@
     <id>bbb77414-fc0d-4db9-bcbb-9238ee5db5db</id>
     <loglevel>INFO</loglevel>
     <name>Load Detail Information</name>
+    <schedule>
+      <month month='*' />
+      <time hour='02' minute='00' seconds='0' />
+      <weekday day='*' />
+      <year year='*' />
+    </schedule>
     <scheduleEnabled>true</scheduleEnabled>
     <sequence keepgoing='false' strategy='node-first'>
       <command>
