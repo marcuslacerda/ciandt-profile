@@ -37,7 +37,7 @@ before_install:
 install:
 # Install the Python dependencies for unittest and app
 - pip install -r requirements_test.txt -t lib_tests
-- pip install --upgrade lxml
+# - pip install --upgrade lxml
 - pip install -r app/requirements.txt -t app/lib/
 # Set the correct project to deploy to
 - gcloud config set project people-ciandt
