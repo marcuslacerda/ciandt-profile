@@ -6,13 +6,7 @@ from elasticsearch.compat import urlencode
 import json
 import logging
 from base64 import b64encode
-
-try:
-    from google.appengine.api import urlfetch
-    URLFETCH_AVAILABLE = True
-except ImportError:
-    URLFETCH_AVAILABLE = False
-
+from google.appengine.api import urlfetch
 
 logger = logging.getLogger('elasticsearch')
 

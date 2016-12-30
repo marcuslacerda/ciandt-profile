@@ -1,10 +1,19 @@
 """Database utils."""
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, Urllib3HttpConnection
 import json
 import os
 import logging
 
+
 logger = logging.getLogger('stack')
+
+try:
+    from google.appengine.api import urlfetch
+    from connection import UrlFetchAppEngine
+    URLFETCH_AVAILABLE = True
+except ImportError:
+    logger.warning('google.appengine.api not found in classpath')
+    URLFETCH_AVAILABLE = False
 
 
 def initEs(host, user, password):
@@ -12,11 +21,23 @@ def initEs(host, user, password):
 
     If user was defined, then the http_auth connection will be created.
     """
-    if user:
-        return Elasticsearch([host], http_auth=(user, password))
-    else:
-        return Elasticsearch([host])
 
+    if URLFETCH_AVAILABLE:
+        connection_class = UrlFetchAppEngine
+    else:
+        connection_class = Urllib3HttpConnection
+
+    if user:
+        return Elasticsearch(
+            [host],
+            http_auth=(user, password),
+            connection_class=connection_class,
+            send_get_body_as='POST')
+    else:
+        return Elasticsearch(
+            [host],
+            connection_class=connection_class,
+            send_get_body_as='POST')
 
 def create_template_if_notexits(es, file, index):
     """If template doesn't exists, create one from json file definition.
