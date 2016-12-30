@@ -25,10 +25,8 @@ services:
        image: nginx:1.11.8
        depends_on:
            - people-elasticsearch
-          #  - people-api
        ports:
            - "9202:9200"
-          #  - "5002:5000"
        volumes:
            - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd
            - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
