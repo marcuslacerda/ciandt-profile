@@ -4,8 +4,8 @@ import json
 import os
 import logging
 
-
 logger = logging.getLogger('stack')
+travis = os.environ.get('TRAVIS')
 
 try:
     from google.appengine.api import urlfetch
@@ -22,10 +22,10 @@ def initEs(host, user, password):
     If user was defined, then the http_auth connection will be created.
     """
 
-    if URLFETCH_AVAILABLE:
-        connection_class = UrlFetchAppEngine
-    else:
+    if not URLFETCH_AVAILABLE or travis:
         connection_class = Urllib3HttpConnection
+    else:
+        connection_class = UrlFetchAppEngine
 
     if user:
         return Elasticsearch(
