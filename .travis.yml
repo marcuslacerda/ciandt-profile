@@ -51,6 +51,11 @@ script:
 - python --version
 # Run the unit tests
 - nosetests -v --nocapture --nologcapture tests
+# - gcloud app deploy -v integration --promote
+# test end_2_end.py
+after_success:
+# replace version control with TRAVIS_BUILD_NUMBER env
+- sed -i bak -e "s/BUILD_NUMBER/$TRAVIS_BUILD_NUMBER/g" app/backend/version.py
 # Deploy the app
 - cd app/
 - gcloud app deploy -v production --promote --verbosity=info
