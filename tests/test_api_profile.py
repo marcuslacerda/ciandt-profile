@@ -31,7 +31,7 @@ class ProfileApiTestCase(unittest.TestCase):
         rv = self.app.get(
             '/api/public/version',
             content_type='application/json')
-        self.assertTrue('0.0.1' in rv.data, 'Invalid version')
+        self.assertTrue('0.0.BUILD_NUMBER' in rv.data, 'Invalid version')
 
     def test_api_get_profile(self):
         """TEST PROFILE API: get user profile."""
