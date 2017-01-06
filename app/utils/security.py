@@ -56,7 +56,7 @@ def login_authorized(fn):
 
 
 def revoke_token(access_token):
-    h = Http()
+    h = Http(disable_ssl_certificate_validation=True)
     logger.debug('revoking %s' % access_token)
     resp, cont = h.request('https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token,
                            headers={'Host': 'www.googleapis.com',
@@ -92,7 +92,7 @@ def validate_token(access_token):
     meant for this app.
 
     Returns None on fail, and an User on success'''
-    h = Http()
+    h = Http(disable_ssl_certificate_validation=True)
     resp, cont = h.request("https://www.googleapis.com/oauth2/v2/userinfo",
                            headers={'Host': 'www.googleapis.com',
                                     'Authorization': access_token})
