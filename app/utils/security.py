@@ -93,7 +93,7 @@ def validate_token(access_token):
 
     Returns None on fail, and an User on success'''
     h = Http(disable_ssl_certificate_validation=True)
-    resp, cont = h.request("https://www.googleapis.com/oauth2/v2/userinfo",
+    resp, cont = h.request("https://www.googleapis.com/oauth2/v3/userinfo",
                            headers={'Host': 'www.googleapis.com',
                                     'Authorization': access_token})
 

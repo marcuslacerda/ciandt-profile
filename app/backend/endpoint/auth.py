@@ -16,15 +16,11 @@ user = api.model('User', {
 })
 
 payload = api.model('Payload json', {
-    'json': fields.String,
+    'client_id': fields.String(readOnly=True, description='The unique id for user account'),
+    'redirect_uri': fields.String(readOnly=True, description='Authorized redirect URI. This is the path in your application that users are redirected to after they have authenticated with Google.'),
+    'code': fields.String(readOnly=True, description='Code autorization to be exchange by access token'),
 })
 
-@api.route('/status')
-class ProviderStatus(Resource):
-    """Shows a list of all people, and lets you POST to add new tasks"""
-    def get(self):
-        """List all people."""
-        return {'provider': 'google', 'status': 'ok'}
 
 @api.route('/google')
 class GoogleProvider(Resource):
