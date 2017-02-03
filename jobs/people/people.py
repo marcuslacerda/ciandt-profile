@@ -34,8 +34,7 @@ class People(object):
         """
         url = '%s/profile/%s' % (self.people_host, login)
         response = requests.get(url=url, auth=HTTPBasicAuth(self.username, self.password))
-
-        logger.debug('user %s and pass %s' % (self.username, self.password))
+        # logger.debug('user %s and pass %s' % (self.username, self.password))
 
         # Response
         if response.status_code != 200:
@@ -55,9 +54,9 @@ class People(object):
         """Find user by login.
 
         Args:
-              login: Username for build url https://people.cit.com.br/search/json?q={login}
+              login: Username for build url https://people.cit.com.br/search/json?q=login:{login}
         """
-        url = '%s/search/json?q=%s' % (self.people_host, login)
+        url = '%s/search/json?q=login:%s' % (self.people_host, login)
         response = requests.get(url=url, auth=HTTPBasicAuth(self.username, self.password))
 
         # Response
@@ -67,6 +66,8 @@ class People(object):
             return None
 
         json_data = json.loads(response.text)
+
+        print json_data
 
         if json_data['data']:
             return json_data['data'][0]
