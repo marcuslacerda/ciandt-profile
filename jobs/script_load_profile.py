@@ -35,6 +35,7 @@ def load_people():
         project = people.find_project_by_user(hit['login'])
 
         admission = datetime.utcfromtimestamp(hit['admission'] / 1000)
+        admission_real = datetime.utcfromtimestamp(hit['admissionReal'] / 1000)
         birthday = datetime.utcfromtimestamp(hit['birthday'] / 1000)
 
         doc = {
@@ -43,6 +44,7 @@ def load_people():
                'role': hit['role'],
                'cityBase': hit['cityBase'],
                'admission': admission,
+               'admissionReal': admission_real,
                'birthday': birthday,
                'project': {
                     'code': hit['project']['code'],
