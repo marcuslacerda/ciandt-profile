@@ -1,7 +1,7 @@
 version: '2'
 services:
     people-elasticsearch:
-        image: elasticsearch:2.4.3
+        image: elasticsearch:5.1.2
         # ports:
         #     - "9200:9200"
         #     - "9300:9300"
@@ -21,6 +21,16 @@ services:
     #        - people-elasticsearch
     #    ports:
     #        - "5002:5000"
+    people-kibana:
+        build: kibana/
+        depends_on:
+            - people-elasticsearch
+        ports:
+            - "5601:5601"
+        # environment:
+        #     - ELASTICSEARCH_URL=http://people-elasticsearch:9200
+        volumes:
+           - ./conf/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     people-nginx:
        image: nginx:1.11.8
        depends_on:
