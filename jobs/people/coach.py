@@ -37,6 +37,16 @@ class Coach(object):
 
         return res
 
+    def update(self, id, doc, refresh=False):
+        """Update a document based on a script or partial data provided."""
+        res = self.es.update(
+            index=index,
+            doc_type=doc_type,
+            body=doc,
+            id=id,
+            refresh=refresh)
+        logger.debug("Document %s updated" % res['_id'])
+
     def delete(self, id):
         """Remove documento by id."""
         self.es.delete(index=index, doc_type=doc_type, id=id)

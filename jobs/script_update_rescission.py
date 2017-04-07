@@ -3,6 +3,7 @@ from config import Config
 from datetime import datetime
 from people import People
 from people import Profile
+from people import Coach
 from utils import logger_builder
 
 try:
@@ -20,42 +21,36 @@ except ImportError:
 config = Config()
 people = People(config)
 profile = Profile(config)
+coach = Coach(config)
 
 logging_level = args['logging_level'] or 'ERROR'
 logger = logger_builder.initLogger(logging_level)
 
 
-def load_people():
+def update_rescission():
     """Get all login from people API and save on elasticsearch database."""
     count = 0
 
-    for hit in people.find_all_users():
+    for docs in profile.find_all()['hits']['hits']:
+        hit = docs['_source']
         count += 1
         logger.info("Loading %s - %s  " % (hit['login'], count))
-        project = people.find_project_by_user(hit['login'])
 
-        admission = datetime.utcfromtimestamp(hit['admission'] / 1000)
-        birthday = datetime.utcfromtimestamp(hit['birthday'] / 1000)
+        (status_code,  people_doc) = people.find_user(hit['login'])
 
-        doc = {
-               'name': hit['name'],
-               'login': hit['login'],
-               'role': hit['role'],
-               'cityBase': hit['cityBase'],
-               'admission': admission,
-               'birthday': birthday,
-               'project': {
-                    'code': hit['project']['code'],
-                    'name': project
-               },
-               'area': hit['area'],
-               'company': hit['company'],
-               'status': hit['status']
-        }
+        if status_code == 200 and people_doc['status'] != 'A':
+            rescission = datetime.utcfromtimestamp(people_doc['rescission'] / 1000)
+            doc_status = {
+                "doc": {
+                      "rescission": rescission,
+                      "status": people_doc['status']
+                  }
+            }
 
-        logger.debug('Inserting people %s' % hit['login'])
+            logger.debug('Inserting people %s' % doc_status)
 
-        profile.save(doc)
+            profile.update(hit['login'], doc_status)
+            coach.update(hit['login'], doc_status)
 
 if __name__ == '__main__':
-	load_people()
+	update_rescission()

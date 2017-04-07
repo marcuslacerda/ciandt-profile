@@ -126,6 +126,26 @@ class People(object):
 
         return response.json()
 
+    def find_user(self, login):
+        """Return all ative users from people system.
+
+        Needs config['PEOPLE_GATEWAY_APP_TOKEN'] to call people URL. app_token:
+        it is a token form api gateway. You need to request one for you
+        if you want call this API.
+        """
+        token = self.config.get('PEOPLE_GATEWAY_APP_TOKEN')
+        headers = {'app_token': token}
+
+        url = '%s/cit/api/v2/people/%s' % (self.config.get('PEOPLE_GATEWAY_HOST'), login)
+
+        logger.debug('Retreive user')
+        logger.debug('url = %s' %url)
+        response = requests.get(url=url, headers=headers)
+
+        logger.info('status %s' % response.status_code)
+
+        return response.status_code, response.json()
+
     def dumpImage(self, login):
         """Download user's image and save it at 'download_images dir."""
         endpoint_url = '%s/profile/%s' % (self.people_host, login)
