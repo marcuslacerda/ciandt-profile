@@ -47,7 +47,7 @@ def update_rescission():
                   }
             }
 
-            logger.debug('Inserting people %s' % doc_status)
+            logger.info('rescission detected for %s'  % hit['login'])
 
             profile.update(hit['login'], doc_status)
             coach.update(hit['login'], doc_status)
