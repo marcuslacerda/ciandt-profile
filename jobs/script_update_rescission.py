@@ -39,7 +39,10 @@ def update_rescission():
         (status_code,  people_doc) = people.find_user(hit['login'])
 
         if status_code == 200 and people_doc['status'] != 'A':
-            rescission = datetime.utcfromtimestamp(people_doc['rescission'] / 1000)
+            if people_doc.get('rescission'):
+                rescission = datetime.utcfromtimestamp(people_doc['rescission'] / 1000)
+            else:
+                rescission = None
             doc_status = {
                 "doc": {
                       "rescission": rescission,
