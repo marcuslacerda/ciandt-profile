@@ -20,7 +20,7 @@ class Profile(object):
     def find_all(self):
         """Retrieve all documents."""
         query = '{"query": {"match_all": {}}}'
-        return self.es.search(index=index, doc_type=doc_type, body=query, size=3000)
+        return self.es.search(index=index, doc_type=doc_type, body=query, size=10000)
 
     def save(self, doc, refresh=False):
         """Save profile document. Create template if it not exists."""

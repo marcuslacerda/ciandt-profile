@@ -117,7 +117,7 @@ class People(object):
         token = self.config.get('PEOPLE_GATEWAY_APP_TOKEN')
         headers = {'app_token': token}
 
-        url = '%s/cit/api/v2/people/' % self.config.get('PEOPLE_GATEWAY_HOST')
+        url = '%s/cit/api/v2/people' % self.config.get('PEOPLE_GATEWAY_HOST')
 
         logger.debug('Retreive all users')
         logger.debug('url = %s' %url)

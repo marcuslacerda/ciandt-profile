@@ -39,10 +39,13 @@ def load_coach():
         login = people_item['login']
         logger.info("Loading %s - %s  " % (login, count))
 
-        coach_item = converter_to_people(people.find_coach_by_login(login))
-        people_item['coach'] = coach_item
-        pdm_item = converter_to_people(people.find_pdm_by_login(login))
-        people_item['pdm'] = pdm_item
+        if 'status' not in people_item:
+            logger.error("Loading %s no has status attribute  " % login)
+        elif people_item['status'] == 'A':
+            coach_item = converter_to_people(people.find_coach_by_login(login))
+            people_item['coach'] = coach_item
+            pdm_item = converter_to_people(people.find_pdm_by_login(login))
+            people_item['pdm'] = pdm_item
 
         coach.save(people_item)
 

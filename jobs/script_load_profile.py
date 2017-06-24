@@ -34,9 +34,12 @@ def load_people():
         logger.info("Loading %s - %s  " % (hit['login'], count))
         project = people.find_project_by_user(hit['login'])
 
-        admission = datetime.utcfromtimestamp(hit['admission'] / 1000)
-        admission_real = datetime.utcfromtimestamp(hit['admissionReal'] / 1000)
-        birthday = datetime.utcfromtimestamp(hit['birthday'] / 1000)
+        if hit['admission']:
+            admission = datetime.utcfromtimestamp(hit['admission'] / 1000)
+            admission_real = datetime.utcfromtimestamp(hit['admissionReal'] / 1000)
+
+        if hit['birthday']:
+            birthday = datetime.utcfromtimestamp(hit['birthday'] / 1000)
 
         doc = {
                'name': hit['name'],
