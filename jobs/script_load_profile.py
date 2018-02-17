@@ -31,8 +31,13 @@ def load_people():
 
     for hit in people.find_all_users():
         count += 1
-        logger.info("Loading %s - %s  " % (hit['login'], count))
-        project = people.find_project_by_user(hit['login'])
+        logger.info("Loading %s - login %s  " % (count, hit['login']))
+        page = people.get_profile_page_by_user(hit['login'])
+        project = 'Empty'
+        awards_list = []
+        if page:
+            project = people.scan_project(page)
+            awards_list = people.scan_awards(page)
 
         if hit['admission']:
             admission = datetime.utcfromtimestamp(hit['admission'] / 1000)
@@ -53,12 +58,17 @@ def load_people():
                     'code': hit['project']['code'],
                     'name': project
                },
+               'awards_count': len(awards_list),
+               'awards' : awards_list,
                'area': hit['area'],
                'company': hit['company'],
-               'status': hit['status']
+               'status': hit['status'],
+               'coach': hit['coach'],
+               'pdm': hit['pdm'],
+               'bp': hit['bp']
         }
 
-        logger.debug('Inserting people %s' % hit['login'])
+        logger.debug('Inserting person %s' % hit['login'])
 
         profile.save(doc)
 

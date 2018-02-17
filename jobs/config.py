@@ -1,8 +1,11 @@
 """Config class."""
+import os
+import sys
+sys.path.insert(1, os.path.abspath(os.curdir))
+sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'lib'))
+
 import logging
 import yaml
-import os.path
-import os
 from dotenv import load_dotenv
 
 logger = logging.getLogger('stack')

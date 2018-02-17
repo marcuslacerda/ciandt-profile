@@ -22,3 +22,6 @@ knowledgemap:
     host: http://localhost:9201
     user:
     pass:
+google:
+  client:
+    secret: test

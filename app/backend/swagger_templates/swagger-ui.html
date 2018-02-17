@@ -39,7 +39,7 @@
             $('#auth_input').change(function() {
               var key = $('#auth_input')[0].value
               if(key && key.trim() != "") {
-                swaggerUi.api.clientAuthorizations.add("oauth2", new SwaggerClient.ApiKeyAuthorization("Authorization", "Bearer " + key, "header"));
+                swaggerUi.api.clientAuthorizations.add("oauth2", new SwaggerClient.ApiKeyAuthorization("Authorization", key, "header"));
               }
             });
         });

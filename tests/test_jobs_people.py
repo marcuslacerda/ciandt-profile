@@ -30,11 +30,12 @@ class PeopleTestCase(unittest.TestCase):
     def test_invlid_login_has_project_empty(self):
         """People: invalid login has project EMPTY."""
         login = 'blablabla'
-        user = self.people.find_project_by_user(login)
-        self.assertEquals('Empty', user)
+        page = self.people.get_profile_page_by_user(login)
+        self.assertIsNone(page)
 
     def test_valid_login_has_project_not_empty(self):
         """People: valid login has project not empty."""
         login = 'mlacerda'
-        project = self.people.find_project_by_user(login)
+        page = self.people.get_profile_page_by_user(login)
+        project = self.people.scan_project(page)
         self.assertIsNotNone(project)

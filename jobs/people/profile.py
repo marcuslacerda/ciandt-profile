@@ -24,7 +24,7 @@ class Profile(object):
 
     def save(self, doc, refresh=False):
         """Save profile document. Create template if it not exists."""
-        database.create_template_if_notexits(self.es, __file__, index)
+        # database.create_template_if_notexits(self.es, __file__, index)
         logger.debug(doc)
         res = self.es.index(
             index=index,

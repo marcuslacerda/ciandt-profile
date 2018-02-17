@@ -31,8 +31,11 @@ def login_authorized(fn):
 
         # try parser json web token
         try:
-            json_web_token = parse_token(request)
-            access_token = get_oauth_token(json_web_token)
+            if 'jwt_disabled' in request.headers:
+                access_token = get_token(request)
+            else:
+                json_web_token = parse_token(request)
+                access_token = get_oauth_token(json_web_token)
 
             logger.debug('access_token: %s' % access_token)
 
@@ -69,8 +72,7 @@ def get_oauth_token(json_web_token):
     access_token =  json_web_token['access_token']
 
     if access_token:
-        oauth_token = 'OAuth %s' % access_token
-        return oauth_token
+        return 'OAuth %s' % access_token
     return None
 
 
@@ -82,6 +84,9 @@ def parse_token(req):
     token = req.headers.get('Authorization').split()[1]
     return jwt.decode(token, app.config['SECRET_KEY'])
 
+def get_token(req):
+    access_token = req.headers.get('Authorization').split()[1]
+    return 'OAuth %s' % access_token
 
 def is_valid_email(email):
     return VALID_EMAIL_DOMAIN in email

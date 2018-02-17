@@ -78,11 +78,11 @@ class GoogleProvider(Resource):
                 'exp': token_info['exp'],
                 'access_token':token['access_token']
             }
+
             jwt = security.create_token(payload)
             return jsonify(token=jwt)
         else:
             return not_authorized(403, 'Invalid email domain. Please sign with ciandt.com acccount')
-
 
 @api.route('/logout')
 class LogoutProvider(Resource):

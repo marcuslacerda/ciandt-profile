@@ -5,6 +5,8 @@ import urlparse
 import json
 from requests.auth import HTTPBasicAuth
 from lxml import html
+import re
+import datetime
 
 logger = logging.getLogger('profile')
 
@@ -26,7 +28,7 @@ class People(object):
         self.username = config.get('PEOPLE_PEOPLE_USER')
         self.password = config.get('PEOPLE_PEOPLE_PASS')
 
-    def find_project_by_user(self, login):
+    def get_profile_page_by_user(self, login):
         """Scan project name from people system using login as parameter.
 
         Args:
@@ -39,16 +41,59 @@ class People(object):
         # Response
         if response.status_code != 200:
             logger.error("fail to load project name for %s. Check people username and password" % login)
-            return 'Empty'
+            return None
 
-        parsed_body = html.fromstring(response.text)
+        return html.fromstring(response.text)
+
+
+    def scan_project(self, parsed_body):
+        """Scan project name from people system using parsed_body html.
+
+        Args:
+              parsed_body: html page load for build url https://people.cit.com.br/profile/+login
+        """
         elements =  parsed_body.xpath('.//div[@class="user-projects"]//ul//li[1]//a')
 
         if elements:
             return elements[0].text_content()
         else:
-            logger.warning('Fail to load project name for %s. Project name not found')
+            logger.warning('Project name not found')
             return 'Empty'
+
+    def scan_awards(self, parsed_body):
+        """Get awards from people system using parsed_body html.
+
+        Args:
+              parsed_body: html page load from https://people.cit.com.br/profile/+login
+        """
+        elements =  parsed_body.xpath('.//div[@class="user-awards"]//div[@class="icon-container"]//img')
+
+        awards = []
+
+        for element in elements:
+            title = element.get('title')
+
+            award_fields = title.split(' | ')
+            doc_award = {
+                'name': award_fields[0]
+            }
+            if len(award_fields) > 2:
+                doc_award['description'] = award_fields[1]
+
+            for field in award_fields:
+                m = re.search(r'(\d+-\d+-\d+)', field)
+                if  m:
+                    given_at = datetime.datetime.strptime(m.group(1), '%d-%m-%y')
+                    doc_award['given_at'] = given_at
+
+                if 'Given by' in field:
+                    doc_award['given_by'] = field.split('Given by')[1]
+
+            awards.append(doc_award)
+
+        logger.debug('%s awards', len(awards))
+        return awards
+
 
     def find_user_by_login(self, login):
         """Find user by login.

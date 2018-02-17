@@ -4,3 +4,4 @@ httplib2
 elasticsearch
 python-dotenv
 lxml
+PyYAML

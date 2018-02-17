@@ -14,14 +14,10 @@ Profile is a powerfull search engine to search people and their connections. .
 
 ```console
 $ git clone git@github.com:marcuslacerda/profile.git
-$ cd profile/server
+$ cd profile/tools
+$ echo "Increase your max virtual memory areas to at least 262144"
+$sudo sysctl -w vm.max_map_count=262144
 $ docker-compose up
-```
-
-If you want a full local enviroment, you will need to start [elasticsearch] and define ELASTICSEARCH_URL environment.
-
-```console
-$ docker run -p 9200:9200 elasticsearch:2.4.3
 ```
 
 You can override this endpoint using this variables
@@ -29,13 +25,17 @@ You can override this endpoint using this variables
 ELASTICSEARCH_URL - Full URL in the form http://MY.HOSTNAME.COM:9200, http//localhost:9200, etc
 ```
 
-To execute tests, install all dependencies from requirements_test.txt into lib_tests path:
+Install all dependencies from requirements_test.txt into lib_tests path and python-nose:
 ```
 pip install -r requirements_test.txt -t lib_tests
+sudo apt install python-nose
 ```
-
-To run the tests
+You can run all test using this command
 ```
+export GOOGLE_CLIENT_SECRET=test
+export GOOGLE_CLIENT_ID=test
+export ELASTICSEARCH_URL=http://localhost:9200
+docker run -p 9200:9200 elasticsearch
 nosetests -v tests
 ```
 #### Coverage:
@@ -45,6 +45,15 @@ To measure tests coverage in Python code. This recipe runs nosetests suite and p
 nosetests -v --with-cover --cover-html --cover-package=. tests/
 ```
 A detailed report from coverage can be found at cover folder in project's path.
+
+### Jobs
+
+```
+$ pip install -r jobs/requirements.txt -t jobs/lib/
+$ cd jobs
+$ python script_load_profile.py --logging_level DEBUG
+```
+There are 3 jobs: script_load_profile, script_load_detail, script_update_rescission
 
 ## Production Setup
 * Elasticsearch credentials is stored as /server/nginx/.htpasswd file. Change default value using htpasswd command
