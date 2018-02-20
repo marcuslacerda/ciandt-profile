@@ -27,21 +27,21 @@ services:
     #        - "5002:5000"
     people-kibana:
         image: docker.elastic.co/kibana/kibana:6.2.1
+        container_name: people-kibana
         depends_on:
             - people-elasticsearch
         # ports:
             # - "5601:5601"
         environment:
             - ELASTICSEARCH_URL=http://people-elasticsearch:9200
-            - ELASTICSEARCH_USERNAME=admin
-            - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
             - xpack.security.enabled=false
             - xpack.monitoring.enabled=false
-            - xpack.reporting.enabled=false                    
+            - xpack.reporting.enabled=false
         # volumes:
         #    - ./conf/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     people-nginx:
        image: nginx:1.11.8
+       container_name: people-nginx
        depends_on:
            - people-elasticsearch
            - people-kibana

@@ -89,9 +89,14 @@ class People(object):
                 if 'Given by' in field:
                     doc_award['given_by'] = field.split('Given by')[1]
 
+
+            if 'given_at' not in doc_award:
+                doc_award['given_at'] = datetime.datetime.strptime('01-01-00', '%d-%m-%y')
             awards.append(doc_award)
 
         logger.debug('%s awards', len(awards))
+        awards.sort(key=lambda x: x['given_at'], reverse=True)
+
         return awards
 
 
