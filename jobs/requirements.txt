@@ -2,4 +2,3 @@ requests
 elasticsearch
 python-dotenv
 lxml
-PyYAML
