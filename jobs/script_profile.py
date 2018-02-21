@@ -9,7 +9,7 @@ try:
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--logging_level', default='ERROR',
+        '--logging_level', default='INFO',
         choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
         help='Set the logging level of detail.')
     flags = parser.parse_args()

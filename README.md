@@ -16,7 +16,7 @@ Profile is a powerfull search engine to search people and their connections. .
 $ git clone git@github.com:marcuslacerda/profile.git
 $ cd profile/tools
 $ echo "Increase your max virtual memory areas to at least 262144"
-$sudo sysctl -w vm.max_map_count=262144
+$ sudo sysctl -w vm.max_map_count=262144
 $ docker-compose up
 ```
 
