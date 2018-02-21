@@ -1,4 +1,3 @@
-google-api-python-client
 requests
 elasticsearch
 python-dotenv
