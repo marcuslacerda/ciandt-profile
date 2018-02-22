@@ -53,7 +53,7 @@ def update_rescission():
             logger.info('rescission detected for %s'  % hit['login'])
 
             profile.update(hit['login'], doc_status)
-            coach.update(hit['login'], doc_status)
+            # coach.update(hit['login'], doc_status)
 
 if __name__ == '__main__':
 	update_rescission()
