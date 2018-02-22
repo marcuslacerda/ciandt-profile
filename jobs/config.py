@@ -8,11 +8,12 @@ import logging
 import yaml
 from dotenv import load_dotenv
 
-logger = logging.getLogger('stack')
+logger = logging.getLogger('profile')
 
 # current_path = os.path.dirname(__file__)
 resources_dir = os.path.join(os.path.expanduser('~'), '.resources')
 dotenv_path = os.path.abspath(os.path.join(resources_dir, '.env'))
+logger.debug ('resource dir %s', resources_dir)
 if os.path.exists(dotenv_path):
     logger.debug('loading .env file')
     load_dotenv(dotenv_path)
