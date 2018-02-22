@@ -4,6 +4,8 @@ from datetime import datetime
 from people import People
 from people import Profile
 from utils import logger_builder
+import os
+print 'home dir: ' + os.path.expanduser('~')
 
 try:
     import argparse
@@ -17,13 +19,12 @@ try:
 except ImportError:
     flags = None
 
-config = Config()
-people = People(config)
-profile = Profile(config)
-
 logging_level = args['logging_level'] or 'ERROR'
 logger = logger_builder.initLogger(logging_level)
 
+config = Config()
+people = People(config)
+profile = Profile(config)
 
 def load_people():
     """Get all login from people API and save on elasticsearch database."""

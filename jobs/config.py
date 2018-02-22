@@ -13,9 +13,7 @@ logger = logging.getLogger('profile')
 # current_path = os.path.dirname(__file__)
 resources_dir = os.path.join(os.path.expanduser('~'), '.resources')
 dotenv_path = os.path.abspath(os.path.join(resources_dir, '.env'))
-logger.info('resource dir ' + resources_dir)
 if os.path.exists(dotenv_path):
-    logger.debug('loading .env file')
     load_dotenv(dotenv_path)
 
 class Config(object):
