@@ -4,8 +4,6 @@ from datetime import datetime
 from people import People
 from people import Profile
 from utils import logger_builder
-import os
-print 'home dir: ' + os.path.expanduser('~')
 
 try:
     import argparse
