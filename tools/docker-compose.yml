@@ -12,6 +12,8 @@ services:
         environment:
           - xpack.security.enabled=false
           - xpack.monitoring.enabled=false
+          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        mem_limit: 1g
     # uncomment if you don't want to use google app engine
     # people-api:
     #    build: app/
