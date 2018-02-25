@@ -1,5 +1,6 @@
 """People Endpoint."""
 from backend import app, logger
+from utils import security
 from flask import request
 from flask_restplus import Namespace, Resource, fields
 from repository import Repository
