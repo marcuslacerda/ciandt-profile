@@ -71,6 +71,22 @@ people = api.model('People', {
             required=True,
         ),
     })),
+    'awards': fields.List(
+        fields.Nested(api.model('AwardData', {
+            'name': fields.String(
+                description=u'Award name',
+                required=True,
+            ),
+            'given_at': fields.DateTime(
+                description=u'The date prize was given to him ',
+                required=True,
+            ),
+            'given_by': fields.String(
+                description=u'Person who gives this award',
+                required=False,
+            ),
+        }))
+    ),
 })
 
 query = api.model('Query DSL', {
