@@ -33,18 +33,18 @@ class ProfileApiTestCase(unittest.TestCase):
             content_type='application/json')
         self.assertTrue('0.0.BUILD_NUMBER' in rv.data, 'Invalid version')
 
-    def test_api_get_profile(self):
-        """TEST PROFILE API: get user profile."""
-        id = 'mlacerda'
-        rv = self.app.get(
-            '/api/profiles/'+id,
-            content_type='application/json')
-        # print rv.data
-        user = json.loads(rv.data)
-        logger.info('response: %s' % user)
-        self.assertEquals(user['login'], id)
-        self.assertEquals(user['name'], 'MARCUS VINICIUS DE OLIVEIRA LACERDA')
-        self.assertEquals(user['role']['name'], 'Developer')
+    # def test_api_get_profile(self):
+    #     """TEST PROFILE API: get user profile."""
+    #     id = 'mlacerda'
+    #     rv = self.app.get(
+    #         '/api/profiles/'+id,
+    #         content_type='application/json')
+    #     # print rv.data
+    #     user = json.loads(rv.data)
+    #     logger.info('response: %s' % user)
+    #     self.assertEquals(user['login'], id)
+    #     self.assertEquals(user['name'], 'MARCUS VINICIUS DE OLIVEIRA LACERDA')
+    #     self.assertEquals(user['role']['name'], 'Developer')
 
 
 def build_mock_people(login):
