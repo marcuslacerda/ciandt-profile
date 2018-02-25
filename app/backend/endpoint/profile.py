@@ -103,7 +103,7 @@ class PeopleSearch(Resource):
     @security.login_authorized
     @api.expect(query)
     @api.marshal_list_with(people)
-    def post(self):
+    def post(self, user):
         """List all people."""
         # print request.json
         return repository.search_by_query(index='people', query=request.json)
@@ -114,7 +114,7 @@ class PeopleList(Resource):
     @api.doc(security='oauth2')
     @security.login_authorized
     @api.marshal_list_with(people)
-    def get(self):
+    def get(self, user):
         """List all people."""
         query = {"query": {"match_all": {}}}
         return repository.search_by_query(query=query)
@@ -127,14 +127,14 @@ class People(Resource):
     @api.doc('get_person')
     @security.login_authorized
     @api.marshal_with(people)
-    def get(self, login):
+    def get(self, user, login):
         """Fetch a given resource."""
         return repository.get_by_login(login)
 
     @api.doc('delete_person')
     @security.login_authorized
     @api.response(204, 'Person deleted')
-    def delete(self, login):
+    def delete(self, user, login):
         """Delete a person given its login identifier."""
         repository.delete_by_login(login)
         return '', 204
@@ -142,7 +142,7 @@ class People(Resource):
     @api.expect(people)
     @security.login_authorized
     @api.marshal_with(people)
-    def put(self, login):
+    def put(self, user, login):
         """Update a task given its identifier."""
         print request.json
         repository.create_template_if_notexits()
