@@ -18,6 +18,10 @@ api = Namespace('profiles', description='Profile operations')
 people = api.model('People', {
     'login': fields.String(readOnly=True, description='The unique identifier'),
     'name': fields.String(required=True, description='Full name'),
+    'admission': fields.Date(required=True, description='Real admission date'),
+    'coach': fields.String(required=True, description='Coach'),
+    'pdm': fields.String(required=True, description='Manager responsible for career path'),
+    'bp': fields.String(required=True, description='Business partner from HR'),
     'area': fields.Nested(api.model('AreaData', {
         'code': fields.Integer(
             description=u'code of area',
