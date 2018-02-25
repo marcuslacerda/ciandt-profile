@@ -99,6 +99,7 @@ repository = Repository(app.config)
 class PeopleSearch(Resource):
     """Shows a list of all people, and lets you POST to add new tasks"""
     @api.doc(security='oauth2')
+    @security.login_authorized
     @api.expect(query)
     @api.marshal_list_with(people)
     def post(self):
@@ -110,6 +111,7 @@ class PeopleSearch(Resource):
 class PeopleList(Resource):
     """Shows a list of all people, and lets you POST to add new tasks."""
     @api.doc(security='oauth2')
+    @security.login_authorized
     @api.marshal_list_with(people)
     def get(self):
         """List all people."""
@@ -122,12 +124,14 @@ class PeopleList(Resource):
 class People(Resource):
     """Show a single people item and lets you delete them"""
     @api.doc('get_person')
+    @security.login_authorized
     @api.marshal_with(people)
     def get(self, login):
         """Fetch a given resource."""
         return repository.get_by_login(login)
 
     @api.doc('delete_person')
+    @security.login_authorized
     @api.response(204, 'Person deleted')
     def delete(self, login):
         """Delete a person given its login identifier."""
@@ -135,6 +139,7 @@ class People(Resource):
         return '', 204
 
     @api.expect(people)
+    @security.login_authorized
     @api.marshal_with(people)
     def put(self, login):
         """Update a task given its identifier."""
