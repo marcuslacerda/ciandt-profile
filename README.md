@@ -35,7 +35,7 @@ You can run all test using this command
 export GOOGLE_CLIENT_SECRET=test
 export GOOGLE_CLIENT_ID=test
 export ELASTICSEARCH_URL=http://localhost:9200
-docker run -p 9200:9200 elasticsearch
+docker run -p 9200:9200 docker.elastic.co/elasticsearch/elasticsearch:6.2.1
 nosetests -v tests
 ```
 #### Coverage:

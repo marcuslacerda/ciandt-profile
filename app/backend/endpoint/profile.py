@@ -18,7 +18,7 @@ api = Namespace('profiles', description='Profile operations')
 people = api.model('People', {
     'login': fields.String(readOnly=True, description='The unique identifier'),
     'name': fields.String(required=True, description='Full name'),
-    'admission': fields.Date(required=True, description='Real admission date'),
+    'admission': fields.Date(required=True, description='Real admission date', attribute='admissionReal'),
     'coach': fields.String(required=True, description='Coach'),
     'pdm': fields.String(required=True, description='Manager responsible for career path'),
     'bp': fields.String(required=True, description='Business partner from HR'),
