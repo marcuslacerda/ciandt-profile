@@ -39,6 +39,7 @@ class People(object):
         # logger.debug('user %s and pass %s' % (self.username, self.password))
 
         # Response
+        # print response.status_code
         if response.status_code != 200:
             logger.error("fail to load project name for %s. Check people username and password" % login)
             return None
