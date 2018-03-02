@@ -19,7 +19,12 @@ def api_notify():
 	event = request.json
 	sheet_id = event['sheet_id']
 	print sheet_id
-	repository.add(event, index, doc_type)
-	response = jsonify(message='Event created')
-	response.status_code = 200
-	return response
+	try:
+		repository.add(event, index, doc_type)
+		response = jsonify(message='Event created')
+		response.status_code = 200
+		return response
+	except Exception as e:
+		response = jsonify(message='error: ' + str(e))
+		response.status_code = 200
+		return response
