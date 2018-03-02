@@ -57,3 +57,9 @@ class Repository(object):
         logger.debug("Created documento ID %s" % res['_id'])
 
         return res
+
+    def add(self, document, index='people', doc_type='profile'):
+        res = self.es.index(index=index, doc_type=doc_type, body=document)
+        logger.debug("Created documento ID %s" % res['_id'])
+
+        return res

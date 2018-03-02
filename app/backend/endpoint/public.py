@@ -14,13 +14,12 @@ def api_version():
 	return jsonify(__version__)
 
 
-@app.route('/api/public/notify/<login>', methods=['POST'])
-def api_notify(login):
+@app.route('/api/public/notify', methods=['POST'])
+def api_notify():
 	event = request.json
-	print event
 	sheet_id = event['sheet_id']
 	print sheet_id
-	repository.insert(login, event, index, doc_type)
-
-	print 'Insert OK'
-	return login
+	repository.add(event, index, doc_type)
+	response = jsonify(message='Event created')
+	response.status_code = 200
+	return response
