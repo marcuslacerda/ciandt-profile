@@ -19,9 +19,10 @@ people = api.model('People', {
     'login': fields.String(readOnly=True, description='The unique identifier'),
     'name': fields.String(required=True, description='Full name'),
     'admission': fields.Date(required=True, description='Real admission date', attribute='admissionReal'),
-    'coach': fields.String(required=True, description='Coach'),
-    'pdm': fields.String(required=True, description='Manager responsible for career path'),
-    'bp': fields.String(required=True, description='Business partner from HR'),
+    'coach': fields.String(required=False, description='Coach'),
+    'pdm': fields.String(required=False, description='Manager responsible for career path'),
+    'bp': fields.String(required=False, description='Business partner from HR'),
+    'birthday': fields.Date(required=True, description='Birthday'),
     'area': fields.Nested(api.model('AreaData', {
         'code': fields.Integer(
             description=u'code of area',

@@ -52,8 +52,8 @@ class Repository(object):
     def delete_by_login(self, login):
         return self.es.delete(index='people', doc_type='profile', id=login)
 
-    def insert(self, login, document):
-        res = self.es.index(index='people', doc_type='profile', body=document, id=login)
+    def insert(self, login, document, index='people', doc_type='profile'):
+        res = self.es.index(index=index, doc_type=doc_type, body=document, id=login)
         logger.debug("Created documento ID %s" % res['_id'])
 
         return res
