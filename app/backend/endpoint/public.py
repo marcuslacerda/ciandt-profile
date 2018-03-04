@@ -1,4 +1,4 @@
-from backend import app
+from backend import app, logger
 from backend.version import __version__
 from flask import jsonify
 from flask import request
@@ -25,6 +25,9 @@ def api_notify():
 		response.status_code = 200
 		return response
 	except Exception as e:
-		response = jsonify(message='error: ' + str(e))
-		response.status_code = 200
+		template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+		message = template.format(type(e).__name__, e.args)
+		print message
+		response = jsonify(message='errors')
+		response.status_code = 500
 		return response

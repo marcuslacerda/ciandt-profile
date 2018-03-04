@@ -8,14 +8,15 @@ logger = logging.getLogger('stack')
 # used to tell if execution from travis-ci. Problably, it is a unittest call
 travis = os.environ.get('TRAVIS')
 
-try:
-    from google.appengine.api import urlfetch
-    from connection import UrlFetchAppEngine
-    URLFETCH_AVAILABLE = True
-except ImportError:
-    logger.warning('google.appengine.api not found in classpath')
-    URLFETCH_AVAILABLE = False
-
+# remove from elasticsearch 6
+# try:
+#     from google.appengine.api import urlfetch
+#     from connection import UrlFetchAppEngine
+#     URLFETCH_AVAILABLE = True
+# except ImportError:
+#     logger.warning('google.appengine.api not found in classpath')
+#     URLFETCH_AVAILABLE = False
+URLFETCH_AVAILABLE = False
 
 def initEs(host, user, password):
     """Init Elasticsearch object.
