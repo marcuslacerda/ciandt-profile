@@ -111,7 +111,7 @@ class PeopleSearch(Resource):
     @api.marshal_list_with(people)
     def post(self, user):
         """List all people."""
-        # print request.json
+        print request.json
 
         return repository.search_by_query(query=request.json)
 

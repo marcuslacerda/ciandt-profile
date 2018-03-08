@@ -38,7 +38,7 @@ class Repository(object):
             logger.debug("Template %s created" % response['acknowledged'])
 
     def search_by_query(self,  query):
-        data = self.es.search(index='people', doc_type='profile', body=query, size=2500)
+        data = self.es.search(index='people', doc_type='profile', body=query, sort="name.keyword")
 
         list_data = []
         for item in data['hits']['hits']:

@@ -9,7 +9,10 @@ var app = angular.module('StarterApp', ['ngMaterial',
   'angular-loading-bar',
   'ui.router',
   'satellizer',
+  'infinite-scroll',
   'angular-google-analytics']);
+
+angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250)
 
 app.config(['$interpolateProvider', function ($interpolateProvider) {
   $interpolateProvider.startSymbol('[[');
