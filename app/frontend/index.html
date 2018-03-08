@@ -14,6 +14,45 @@
 
   <div layout="column" class="relative" layout-fill role="main" >
 
+    <!-- Header -->
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"  aria-label="Menu" >
+          <img class="logo" src="assets/icon/logo_black.png" >
+        </md-button>
+        <h3>
+          <a href="/#/stacks">Profile</a>
+        </h3>
+        <span flex></span>
+        <section ng-controller="AuthController">
+          <md-menu md-position-mode="target-left target" ng-if="isAuthenticated()">
+            <md-button aria-label="Open demo menu" class="md-icon-button" style="height: 60px!important; width: 60px!important" ng-click="$mdOpenMenu($event)">
+              <img src="[[user.picture]]" class="avatar">
+            </md-button>
+
+            <md-menu-content width="4" >
+              <md-menu-item>
+                <md-button ng-href="/#/profile/me">
+                    <div layout="row" flex>
+                      <p flex>Profile</p>
+                      <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                    </div>
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="logout()">
+                    <div layout="row" flex>
+                      <p flex>Logout</p>
+                      <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+                    </div>
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </section>
+      </div>
+    </md-toolbar>
+
     <!-- ui-routes - SPA -->
     <div ui-view></div>
 
@@ -43,6 +82,8 @@
   <script src="app/controllers/auth.controller.js" > </script>
   <script src="app/controllers/home.controller.js" > </script>
   <script src="app/controllers/profile.controller.js" > </script>
+  <script src="app/controllers/me.controller.js" > </script>
+  <script src="app/controllers/search.controller.js" > </script>
 
   <script src="app/interceptors/auth.interceptor.js" > </script>
   <script src="app/services/account.js" > </script>

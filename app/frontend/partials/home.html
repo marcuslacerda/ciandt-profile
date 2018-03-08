@@ -1,46 +1,6 @@
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <md-button class="md-icon-button"  aria-label="Menu" >
-      <img class="logo" src="assets/icon/logo_black.png" >
-    </md-button>
-    <h3>
-      <a href="/#/stacks">Profile</a>
-    </h3>
-    <span flex></span>
-    <section ng-controller="AuthController">
-      <md-menu md-position-mode="target-left target" ng-if="isAuthenticated()">
-        <md-button aria-label="Open demo menu" class="md-icon-button" style="height: 60px!important; width: 60px!important" ng-click="$mdOpenMenu($event)">
-          <img src="[[user.picture]]" class="avatar">
-        </md-button>
-
-        <md-menu-content width="4" >
-          <!--
-          <md-menu-item>
-            <md-button ng-href="/#/profile">
-                <div layout="row" flex>
-                  <p flex>Profile</p>
-                  <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
-                </div>
-            </md-button>
-          </md-menu-item>
-          -->
-          <md-menu-item>
-            <md-button ng-click="logout()">
-                <div layout="row" flex>
-                  <p flex>Logout</p>
-                  <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
-                </div>
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
-    </section>
-
-  </div>
-</md-toolbar>
-
-<div layout="column" ng-controller="AuthController">
-  <div layout="row" style="height: 200px" layout-align="center center">
+<!-- home content: show if user not logged in -->
+<div layout="column" ng-controller="AuthController" >
+  <div layout="row" style="height: 200px" layout-align="center center" ng-if="!isAuthenticated()">
     <div layout="row" hide-xs flex="70" layout-align="center center">
       <span class="md-display-3"></span>
     </div>
@@ -54,14 +14,25 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div ng-controller="HomeController as ctrl" layout="column" ng-cloak>
-    <md-content layout-padding layout="column">
-      <form ng-submit="$event.preventDefault()">
+<!-- home content -->
+<md-content layout-padding layout="column"   >
+  <div ng-controller="HomeController as ctrl" layout="column" ng-cloak style="min-height: 70% !important;" layout-align="center">
+    <div>
+        <div layout="row" id="searchContent" >
+          <md-icon>search</md-icon>
+          <input autofocus type="text" id="searchBox" ng-model="query_string" ng-enter="submitSearch()" placeholder="Search">
+      </div>
+    </div>
+
+    <!-- <md-content layout-padding layout="column" >
+      <form>
         <p>Use <code>&lt;md-autocomplete&gt;</code> with custom templates to show styled autocomplete results.</p>
         <md-autocomplete
             ng-disabled="ctrl.isDisabled"
             md-no-cache="ctrl.noCache"
+            ng-enter="ctrl.gotoSearchPage(ctrl.searchText)"
             md-selected-item="ctrl.selectedItem"
             md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
             md-search-text="ctrl.searchText"
@@ -87,7 +58,33 @@
           </md-item-template>
         </md-autocomplete>
       </form>
-    </md-content>
+    </md-content> -->
+
   </div>
 
-</div>
+  <md-toolbar id="footer" class="md-medium-tall">
+    <div layout="column" flex>
+      <div class="footer-links" layout="row" layout-align="space-around start">
+        <div layout="column">
+          <span>Another Tools</span>
+          <a href="http://stack-ciandt.appspot.com/" target="_blank">Stack</a>
+          <a href="https://techgallery.ciandt.com" target="_blank">Tech Gallery</a>
+          <a href="https://techanalytics.ciant.com" target="_blank">Tech Analytics</a>
+        </div>
+
+        <div layout="column">
+          <span>Profile</span>
+          <a href="/#/search">Search</a>
+          <a href="/api">API</a>
+        </div>
+
+        <div layout="column">
+          <span>Follow Us</span>
+          <a href="https://github.com/marcuslacerda/profile-gallery" target="_blank">GitHub</a>
+          <a href="https://ciandt-archs.slack.com" target="_blank">Slack Channel</a>
+          <a href="https://github.com/marcuslacerda/profile-gallery/issues" target="_blank">Open Issues ([[open_issues]])</a>
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
+</md-content>

@@ -59,3 +59,45 @@ md-toast.error .md-toast-content {
 .autocomplete-custom-template .item-title md-icon {
   height: 18px;
   width: 18px; }
+
+
+  #footer {
+    min-height: 150px;
+    background: #424242;
+  }
+
+  #footer span{
+    font-size: 24px;
+  }
+
+  #footer a {
+       color: #fff;
+       font-size: 14px;
+       padding-top: 10px
+  }
+
+  #footer a:hover {
+       color: #1E88E5;
+  }
+
+  #searchContent {
+    height: 64px;
+    width: 100%;
+    border: 1px solid gray;
+  }
+
+  #searchBox {
+      color: rgb(67, 67, 67);
+      font-size: 20px;
+      margin-left: 16px;
+      padding: 8px 0px;
+      width: 100%;
+      border: none;
+      background: none
+  }
+
+  [ng-click],
+  [data-ng-click],
+  [x-ng-click] {
+      cursor: pointer;
+  }

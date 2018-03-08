@@ -100,10 +100,26 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
         template: null,
         controller: 'AuthController'
       })
+      .state('me', {
+        url: '/profile/me',
+        templateUrl: 'partials/profile.html',
+        controller: 'MeController',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
       .state('profile', {
-        url: '/profile',
+        url: '/profile/:key',
         templateUrl: 'partials/profile.html',
         controller: 'ProfileController',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('search', {
+        url: '/search/:key',
+        templateUrl: 'partials/search.html',
+        controller: 'SearchController',
         resolve: {
           loginRequired: loginRequired
         }
@@ -138,4 +154,20 @@ $mdThemingProvider.theme('default').primaryPalette('customBlue', {
 
 $mdThemingProvider.theme('input', 'default')
     .primaryPalette('grey')
+});
+
+
+angular.module('StarterApp').directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if(event.which === 13) {
+                console.log("key enter - exec " + attrs.ngEnter)
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter, {'event': event});
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
 });

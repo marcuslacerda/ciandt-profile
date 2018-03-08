@@ -23,6 +23,7 @@ people = api.model('People', {
     'pdm': fields.String(required=False, description='Manager responsible for career path'),
     'bp': fields.String(required=False, description='Business partner from HR'),
     'birthday': fields.Date(required=True, description='Birthday'),
+    'telephone': fields.String(required=True, description='Public telephone'),
     'area': fields.Nested(api.model('AreaData', {
         'code': fields.Integer(
             description=u'code of area',
@@ -95,7 +96,7 @@ people = api.model('People', {
     ),
 })
 
-query = api.model('Query DSL', {
+query = api.model('Elasticsearch Query DSL', {
     'query': fields.String,
 })
 
@@ -111,7 +112,8 @@ class PeopleSearch(Resource):
     def post(self, user):
         """List all people."""
         # print request.json
-        return repository.search_by_query(index='people', query=request.json)
+
+        return repository.search_by_query(query=request.json)
 
 @api.route('/')
 class PeopleList(Resource):

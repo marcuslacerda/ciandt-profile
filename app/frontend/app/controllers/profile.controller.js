@@ -1,16 +1,14 @@
-app.controller('ProfileController', function($scope, $auth, Account) {
-    
-    $scope.getProfile = function() {
-      Account.getProfile()
-        .then(function(response) {
-          console.log(response.data)
-          $scope.user = response.data;
-        })
-        .catch(function(response) {
-          console.log('ERROR')
-          console.log(response)
-        });
-    };
+app.controller('ProfileController', function($scope, $auth, $stateParams, Account, $resource) {
 
-    $scope.getProfile();
+    $scope.key = $stateParams.key
+
+    console.log ('profile controller')
+    console.log($scope.key)
+
+    var AccountAPI = $resource('api/profiles/:userId', {userId:'@id'});
+
+    AccountAPI.get({userId:$scope.key}, function(data){
+      console.log(data)
+      $scope.user = data;
+    });
   });

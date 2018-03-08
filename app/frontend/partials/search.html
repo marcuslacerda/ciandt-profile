@@ -1,0 +1,43 @@
+<md-content class="md-padding" layout="row" layout-wrap>
+  <div id="searchContent">
+      <div layout="row" style="width:100%;height:100%;">
+        <md-icon>search</md-icon>
+        <input type="text" id="searchBox" ng-model="query_string" ng-enter="submitSearch()" placeholder="Search">
+    </div>
+  </div>
+  <div class="profile-card" ng-repeat="person in items" >
+    <md-card style="width: 400px; height: 250px">
+       <md-card-title ng-click="show(person)">
+         <md-card-title-text>
+           <span class="md-title">[[person.name]]</span>
+         </md-card-title-text>
+       </md-card-title>
+
+       <md-card-content layout="row">
+         <div class="md-media-sm card-media" style="width: 80px; height: 80px">
+           <img ng-src="[[imageProfile(person)]]" style="max-width: 100%; max-height: 100%;">
+         </div>
+         <div layout="column" layout-align="left">
+           <span class="md-subhead">[[person.role.name]]</span>
+           <a href="#" class="md-subhead" >[[email(person)]]</a>
+           <span class="md-subhead">[[person.telephone]]</span>
+         </div>
+
+       </md-card-content>
+       <md-divider></md-divider>
+       <md-card-actions layout="row" layout-align="left center">
+         <span class="md-caption">Tech Strength: <b>2.345</b></span>
+         <md-button class="md-icon-button" aria-label="People" ng-click="show(person)">
+           <md-icon>people</md-icon>
+         </md-button>
+         <md-button  style="overflow: inherit;" class="md-icon-button badge1" data-badge="[[item.like_count]]" aria-label="Favorite" ng-click="like(item)">
+           <md-icon ng-class="item.like_count > 0 ? 'selected' : 'normal'" aria-label="Favorite">favorite</md-icon>
+         </md-button>
+         <div layout="column" layout-align="center center" ng-show="item.last_activity_user != null">
+           <span md-colors="{color:'Grey'}" class="md-caption" title="Last updated by [[item.last_activity_user]]">last activity</span>
+           <span md-colors="{color:'Grey'}" class="md-caption" title="Last updated by [[item.last_activity_user]]">[[item.last_activity | date:'dd-MMM HH:mm']]</span>
+         </div>
+       </md-card-actions>
+    </md-card>
+  </div>
+</md-content>

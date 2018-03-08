@@ -64,7 +64,8 @@ def load_people():
                'status': hit['status'],
                'coach': hit['coach'],
                'pdm': hit['pdm'],
-               'bp': hit['bp']
+               'bp': hit['bp'],
+               'telephone': hit['telephone']
         }
 
         logger.debug('Inserting person %s' % hit['login'])
@@ -73,3 +74,4 @@ def load_people():
 
 if __name__ == '__main__':
 	load_people()
+s
