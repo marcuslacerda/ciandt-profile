@@ -8,7 +8,7 @@ services:
         #   - "9300:9300"
         # uncomment this section to have elasticsearch data persisted to a volume
         volumes:
-         - /home/profile/data:/usr/share/elasticsearch/data
+         - ~/data:/usr/share/elasticsearch/data
         environment:
           - xpack.security.enabled=false
           - xpack.monitoring.enabled=false
