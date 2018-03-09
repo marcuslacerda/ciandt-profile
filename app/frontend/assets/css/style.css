@@ -39,8 +39,6 @@ md-toast.error .md-toast-content {
   width: 48px;
   height: 48px
 }
-
-
 .autocomplete-custom-template li {
   border-bottom: 1px solid #ccc;
   height: auto;
@@ -60,6 +58,24 @@ md-toast.error .md-toast-content {
   height: 18px;
   width: 18px; }
 
+.endorsers-image {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+#profile {
+  background: #b9b8b8;
+}
+
+.image-profile {
+  margin: 5px;
+  width: 100px;
+  height: 100px;
+}
 
   #footer {
     min-height: 150px;

@@ -5,6 +5,9 @@ from flask import request
 from flask_restplus import Namespace, Resource, fields
 from repository import Repository
 from elasticsearch import NotFoundError
+import requests
+import json
+from techgallery import TechGallery
 
 """
 Referencias:
@@ -84,6 +87,10 @@ people = api.model('People', {
                 description=u'Award name',
                 required=True,
             ),
+            'description': fields.String(
+                description=u'Award description',
+                required=False,
+            ),
             'given_at': fields.DateTime(
                 description=u'The date prize was given to him ',
                 required=True,
@@ -100,6 +107,19 @@ query = api.model('Elasticsearch Query DSL', {
     'query': fields.String,
 })
 
+stack = api.model('Stack', {
+    'key': fields.String(readOnly=True, description='The unique identifier'),
+    'owner': fields.String(readOnly=True, description='The owner (customer name)'),
+    'last_activity': fields.Date(required=True, description='Last updated date'),
+    'name': fields.String(required=True, description='Product name or project')
+})
+
+skill = api.model('skill', {
+    'technologyName': fields.String(readOnly=True, description='The unique identifier'),
+    'skillLevel': fields.Integer(readOnly=True, description='The owner (customer name)'),
+    'endorsementsCount': fields.Integer(required=True, description='Total of edorsements')
+})
+
 repository = Repository(app.config)
 
 @api.route('/_search')
@@ -114,6 +134,64 @@ class PeopleSearch(Resource):
         print request.json
 
         return repository.search_by_query(query=request.json)
+
+@api.route('/stack/<login>')
+class PeopleStack(Resource):
+    """Shows a list of skills"""
+    @api.doc(security='oauth2')
+    @security.login_authorized
+    @api.response(404, 'People not found')
+    @api.marshal_list_with(stack)
+    def get(self, user, login):
+        """List Person's skills."""
+
+        json_web_token = security.parse_token(request)
+        access_token = security.get_oauth_token(json_web_token)
+
+        query = 'team.login:' + login
+        stack_api_url = 'http://stack-ciandt.appspot.com/api/stacks/_search?q=' + query
+
+        headers = {'Authorization': access_token}
+        r = requests.get(stack_api_url, headers=headers)
+        return json.loads(r.text)
+
+@api.route('/skill/<login>')
+class PeopleSkill(Resource):
+    """Shows a list of skills"""
+    @api.doc(security='oauth2')
+    @security.login_authorized
+    @api.response(404, 'People not found')
+    @api.marshal_list_with(skill)
+    def get(self, user, login):
+        """List Person's skills."""
+        
+        config = {
+            'TECHGALLERY_ENDPOINT' : 'https://tech-gallery.appspot.com/_ah/api/rest/v1',
+            'TECHGALLERY_AUTH': True
+        }
+        techgallery =  TechGallery(config)
+
+        (profile, status_code) = techgallery.profile(login)
+
+        if status_code != 200:
+            logger.warn("%s not has login on Tech Gallery" % people['login'])
+            response = jsonify(message='Not Found')
+            response.status_code = 404
+
+        skill = []
+        if 'technologies' in profile:
+            for tech in profile['technologies']:
+                print tech['technologyName']
+                skill.append(tech)
+
+        print '====> FINISH '
+        print skill
+        # print profile
+        # profile = json.loads(r.text)
+        #
+        # print stacks
+
+        return skill
 
 @api.route('/')
 class PeopleList(Resource):

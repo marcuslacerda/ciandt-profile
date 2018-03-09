@@ -14,9 +14,7 @@ app.controller('SearchController', ['$scope', '$http', '$auth', '$q', '$log', '$
     $scope.query_string = $stateParams.key;
 
     if ($scope.query_string != "*" && $scope.query_string != "") {
-
       fetchNext($scope.query_string, 0);
-
     }
 
     function fetchNext(text, from) {

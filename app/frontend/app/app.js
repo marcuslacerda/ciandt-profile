@@ -19,7 +19,6 @@ app.config(['$interpolateProvider', function ($interpolateProvider) {
   $interpolateProvider.endSymbol(']]');
 }]);
 
-
 app.config(['AnalyticsProvider', function (AnalyticsProvider) {
    // Add configuration code as desired
    AnalyticsProvider.setAccount('UA-88644810-1');  //UU-XXXXXXX-X should be your tracking code

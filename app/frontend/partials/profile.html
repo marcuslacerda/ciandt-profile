@@ -1,22 +1,88 @@
-<div layout="column"class="container">
-<h1>PROFILE - DRAFT</h1>
-
-<span>[[user.name]]</span>
-<md-menu md-position-mode="target-right target" >
-  <md-button aria-label="Open demo menu" class="md-icon-button" style="height: 60px!important; width: 60px!important" ng-click="$mdOpenMenu($event)">
-    <img src="https://citweb.cit.com.br/ipeople/photo?cdLogin=[[user.login]]" class="avatar">
-  </md-button>
-
-  <md-menu-content width="4" >
-    <md-menu-item ng-repeat="item in [1, 2, 3]">
-      <md-button ng-click="ctrl.announceClick($index)">
-          <div layout="row" flex>
-            <p flex>Option [[item]]</p>
-            <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
+<md-content class="md-padding" layout="row" layout-wrap>
+  <div id="details" layout="column" flex="80" >
+    <div id="profile" layout="row">
+      <img class="image-profile" ng-src="[[imageProfile(user)]]">
+      <div layout="column" flex="50">
+        <span class="md-title">[[user.name]]</span>
+        <span class="md-subhead">[[user.role.name]]</span>
+        <span class="md-subhead">[[email(user)]]</span>
+        <span class="md-subhead">[[user.telephone]]</span>
+      </div>
+      <div layout="column">
+        <div>
+          <span class="md-display-1">3.240</span>
+          <span class="md-subhead">pontos</span>
+        </div>
+        <div>
+          <span class="md-subhead">Ranking></span>
+          <span class="ranking">32</span>
+          <a href="#">Ver ranking</a>
+        </div>
+      </div>
+    </div>
+    <div id="awards" layout="row">
+      <img ng-src="[[imageAward(item.name)]]" hint="[[item.description]]" ng-repeat="item in user.awards" />
+    </div>
+    <div layout="row">
+      <div id="skills" layout="column" flex="70">
+        <span class="md-title">Skill & Endorsement</span>
+        <br>
+        <div id="tech-item" layout="row" layout-align="left center">
+          <span flex="10">JIRA</span>
+          <div flex="30" layout-align="left center">
+            <img src="assets/icon/yellow-rating-star-24.png">
+            <img src="assets/icon/yellow-rating-star-24.png">
+            <img src="assets/icon/yellow-rating-star-24.png">
+            <img src="assets/icon/yellow-rating-star-24.png">
           </div>
-      </md-button>
-    </md-menu-item>
-  </md-menu-content>
-</md-menu>
-</div>
-</div>
+          <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
+            <md-icon>plus_one</md-icon>
+          </md-button>
+          <div flex="50">
+            <img class="endorsers-image" ng-src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50" uibtooltip="Junior Adherbal Gomes da Silva" src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50">
+            <span>Junior Aderbal te endosso e mais 12 pessoas</span>
+          </div>
+        </div>
+        <div id="tech-item" layout="row" layout-align="left center">
+          <span flex="10">Docker</span>
+          <div flex="30" layout-align="left center">
+            <img src="assets/icon/yellow-rating-star-24.png" >
+            <img src="assets/icon/yellow-rating-star-24.png" >
+          </div>
+          <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
+            <md-icon>plus_one</md-icon>
+          </md-button>
+          <div flex="50">
+            <img class="endorsers-image" ng-src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50" uibtooltip="Junior Adherbal Gomes da Silva" src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50">
+            <span>Junior Aderbal te endosso e mais 4 pessoas</span>
+          </div>
+        </div>
+      </div>
+      <div id="stacks" layout="column" flex="30">
+        <span class="md-title">Owner / Stack</span>
+        <md-divider></md-divider>
+        <br>
+        <div id="stack-item" layout="column">
+          <span class="md-subhead"><a href="http://stack-ciandt.appspot.com/#/stack/1fXq2a7iQg8DfIKW4s-SVtuL8JDQULo8VFVn2kszxfwQ" target="_blank" >CI&T / Tech Gallery</a></span>
+          <span class="md-subhead">Itaú / Alta Plataforma</span>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div id="history" layout="column" flex="20" hide-xs	>
+      <span class="md-title">History (last 10)</span>
+      <br>
+      <span class="md-subhead">Endorse: por Felipe Osti em JIRA <b>(+5 pontos)</b></span>
+      <span class="md-subhead">Awards: recebeu 10 Years > +50 pontos</span>
+      <span class="md-subhead">Foi endossado por Felipe Osti em JIRA > +5 pontos</span>
+      <span class="md-subhead">University: completou o curso Gestão de Métricas > +10 pontos</span>
+      <span class="md-subhead">Jedi: tornou-se sensei em Docker > + 100 pontos</span>
+      <span class="md-subhead">Tansfer: Jose Ribeiro te agradece <b>(+5 pontos)</b></span>
+      <span class="md-subhead">Foi endossado por Felipe Osti em JIRA > +5 pontos</span>
+      <span class="md-subhead">Transfer: agradeceu Ricardo <b>(-5 pontos)</b></span>
+      <span class="md-subhead">Bla bla bla bla</b></span>
+      <span class="md-subhead">Bla bla bal</b></span>
+  </div>
+
+</md-content>
