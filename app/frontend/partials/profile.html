@@ -26,35 +26,19 @@
     <div layout="row">
       <div id="skills" layout="column" flex="70">
         <span class="md-title">Skill & Endorsement</span>
+        <md-divider></md-divider>
         <br>
-        <div id="tech-item" layout="row" layout-align="left center">
-          <span flex="10">JIRA</span>
-          <div flex="30" layout-align="left center">
-            <img src="assets/icon/yellow-rating-star-24.png">
-            <img src="assets/icon/yellow-rating-star-24.png">
-            <img src="assets/icon/yellow-rating-star-24.png">
-            <img src="assets/icon/yellow-rating-star-24.png">
+        <div id="tech-item" layout="row" layout-align="left center" ng-repeat="skill in skills | filter: tops">
+          <span flex="20">[[skill.technologyName]]</span>
+          <div flex="20" layout-align="left center">
+            <img src="assets/icon/yellow-rating-star-24.png" ng-repeat="n in [] | range:skill.skillLevel">
           </div>
           <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
             <md-icon>plus_one</md-icon>
           </md-button>
           <div flex="50">
-            <img class="endorsers-image" ng-src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50" uibtooltip="Junior Adherbal Gomes da Silva" src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50">
-            <span>Junior Aderbal te endosso e mais 12 pessoas</span>
-          </div>
-        </div>
-        <div id="tech-item" layout="row" layout-align="left center">
-          <span flex="10">Docker</span>
-          <div flex="30" layout-align="left center">
-            <img src="assets/icon/yellow-rating-star-24.png" >
-            <img src="assets/icon/yellow-rating-star-24.png" >
-          </div>
-          <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
-            <md-icon>plus_one</md-icon>
-          </md-button>
-          <div flex="50">
-            <img class="endorsers-image" ng-src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50" uibtooltip="Junior Adherbal Gomes da Silva" src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50">
-            <span>Junior Aderbal te endosso e mais 4 pessoas</span>
+            <!-- <img class="endorsers-image" ng-src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50" uibtooltip="Junior Adherbal Gomes da Silva" src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50"> -->
+            <span>Já foi endossado por [[skill.endorsementsCount]] pessoas</span>
           </div>
         </div>
       </div>
@@ -62,9 +46,8 @@
         <span class="md-title">Owner / Stack</span>
         <md-divider></md-divider>
         <br>
-        <div id="stack-item" layout="column">
-          <span class="md-subhead"><a href="http://stack-ciandt.appspot.com/#/stack/1fXq2a7iQg8DfIKW4s-SVtuL8JDQULo8VFVn2kszxfwQ" target="_blank" >CI&T / Tech Gallery</a></span>
-          <span class="md-subhead">Itaú / Alta Plataforma</span>
+        <div id="stack-item" layout="column" ng-repeat="stack in stacks">
+          <span class="md-subhead">[[stack.owner]] / [[stack.name]] <a href="[['http://stack-ciandt.appspot.com/#/stack/' + stack.key ]]" target="_blank" >(Ver mais...)</a></span>
         </div>
         <br>
       </div>

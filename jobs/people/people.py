@@ -76,7 +76,7 @@ class People(object):
 
             award_fields = title.split(' | ')
             doc_award = {
-                'name': award_fields[0]
+                'name': award_fields[0].trim()
             }
             if len(award_fields) > 2:
                 doc_award['description'] = award_fields[1]

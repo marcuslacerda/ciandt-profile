@@ -183,6 +183,8 @@ class PeopleSkill(Resource):
             for tech in profile['technologies']:
                 skill.append(tech)
 
+        skill.sort(key=lambda x:x['endorsementsCount'], reverse=True)
+
         return skill
 
 @api.route('/')

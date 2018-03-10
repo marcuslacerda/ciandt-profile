@@ -159,7 +159,7 @@ $mdThemingProvider.theme('input', 'default')
 });
 
 
-angular.module('StarterApp').directive('ngEnter', function() {
+app.directive('ngEnter', function() {
     return function(scope, element, attrs) {
         element.bind("keydown keypress", function(event) {
             if(event.which === 13) {
@@ -172,4 +172,13 @@ angular.module('StarterApp').directive('ngEnter', function() {
             }
         });
     };
+});
+
+app.filter('range', function() {
+  return function(input, total) {
+    total = parseInt(total);
+    for (var i=0; i<total; i++)
+      input.push(i);
+    return input;
+  };
 });

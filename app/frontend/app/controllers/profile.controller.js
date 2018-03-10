@@ -7,10 +7,11 @@ app.controller('ProfileController', function($scope, $auth, $stateParams, Accoun
     //
     var User = $resource('api/profiles/:login');
 
-    var SkillAPI = $resource('api/profiles/skill/:login',
+    var ProfileAPI = $resource('api/profiles/:action/:login',
         { login : '@login' },
         {
-          list : { method : 'GET', isArray: true }
+          skillList : { method : 'GET', params : {action : 'skill'}, isArray: true },
+          stackList : { method : 'GET', params : {action : 'stack'}, isArray: true }
         }
     );
 
@@ -20,11 +21,15 @@ app.controller('ProfileController', function($scope, $auth, $stateParams, Accoun
     });
 
     //
-    SkillAPI.list({login:$scope.key}, function(data) {
+    ProfileAPI.skillList({login:$scope.key}, function(data) {
       console.log(data)
-      $scope.skils = data;
+      $scope.skills = data;
     })
 
+    ProfileAPI.stackList({login:$scope.key}, function(data) {
+      console.log(data)
+      $scope.stacks = data;
+    })
 
     $scope.imageProfile = function(person) {
       if (person)
@@ -38,6 +43,10 @@ app.controller('ProfileController', function($scope, $auth, $stateParams, Accoun
 
     $scope.imageAward = function(phone) {
       return "assets/icon/" + phone + ".jpeg"
+    }
+
+    $scope.tops = function(skill) {
+      return skill['skillLevel'] >= 3 && skill.endorsementsCount > 1
     }
 
   });

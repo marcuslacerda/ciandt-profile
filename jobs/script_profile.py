@@ -74,4 +74,3 @@ def load_people():
 
 if __name__ == '__main__':
 	load_people()
-s
