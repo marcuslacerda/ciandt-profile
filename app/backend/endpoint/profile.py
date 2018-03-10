@@ -164,7 +164,7 @@ class PeopleSkill(Resource):
     @api.marshal_list_with(skill)
     def get(self, user, login):
         """List Person's skills."""
-        
+
         config = {
             'TECHGALLERY_ENDPOINT' : 'https://tech-gallery.appspot.com/_ah/api/rest/v1',
             'TECHGALLERY_AUTH': True
@@ -181,15 +181,7 @@ class PeopleSkill(Resource):
         skill = []
         if 'technologies' in profile:
             for tech in profile['technologies']:
-                print tech['technologyName']
                 skill.append(tech)
-
-        print '====> FINISH '
-        print skill
-        # print profile
-        # profile = json.loads(r.text)
-        #
-        # print stacks
 
         return skill
 

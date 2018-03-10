@@ -1,8 +1,10 @@
 """"TechGallery class."""
+from backend import current_path
 from httplib2 import Http
 import re
 import json
 import os
+import sys
 import logging
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -30,11 +32,7 @@ class TechGallery(object):
         Returns:
             Credentials, the obtained credential.
         """
-        home_dir = os.path.expanduser('~')
-        credential_dir = os.path.join(home_dir, '.resources')
-        if not os.path.exists(credential_dir):
-            os.makedirs(credential_dir)
-        credential_path = os.path.join(credential_dir, 'knowledgemap_service_account.json')
+        credential_path = os.path.abspath(os.path.join(current_path, '..', 'knowledgemap_service_account.json'))
         return ServiceAccountCredentials.from_json_keyfile_name(credential_path, SCOPES)
 
     def profile(self, login):

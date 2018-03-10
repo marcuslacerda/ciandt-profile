@@ -13,6 +13,7 @@ client_path = os.path.abspath(os.path.join(current_path, '..', 'frontend'))
 dotenv_path = os.path.abspath(os.path.join(current_path, '..', '.env'))
 load_dotenv(dotenv_path)
 
+
 APP_NAME = 'profile'
 
 app = Flask(
@@ -49,7 +50,6 @@ if (2, 7) <= sys.version_info < (3, 2):
 logger = logging.getLogger('profile')
 logger.info('starting app => %s ' % id(app))
 logger.info('starting mode => %s ' % mode)
-
 
 @app.after_request
 def after_request(response):

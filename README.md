@@ -6,9 +6,6 @@ Profile is a powerfull search engine to search people and their connections. .
 ## Prerequisites
 [Google Cloud SDK][gcloud] used do knowledge map crawler
 [Git][] and [Python 2.7.9 ][Python]. For Python you need to install the following modules:
-* pip install elasticsearch
-* pip install lxml
-* pip install pyyaml
 
 ## Setup Instructions
 
@@ -83,6 +80,15 @@ Encrypt the file locally. If prompted to overwrite the existing file, respond ye
 ```console
 $ sudo travis encrypt-file credentials.tar.gz --add -p
 ```
+
+# Setup Local Env
+MAC
+brew tap caskroom/cask
+brew cask install google-cloud-sdk
+gcloud components update
+gcloud components install app-engine-python
+gcloud components install app-engine-python-extras
+
 
 
 ## Contributing

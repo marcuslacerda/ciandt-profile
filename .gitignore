@@ -17,4 +17,5 @@ lib
 # credentials
 .env
 *_secret.json
+*knowledgemap_service_account.json
 credentials.tar.gz

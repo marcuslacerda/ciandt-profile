@@ -27,6 +27,7 @@ before_install:
   -in credentials.tar.gz.enc -out credentials.tar.gz -d
 - tar -xzf credentials.tar.gz
 - mv .env app/
+- mv knowledgemap_service_account.json app/
 - gcloud auth activate-service-account --key-file service_account_secret.json
 install:
 - pip install -r requirements_test.txt -t lib_tests
