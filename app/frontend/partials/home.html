@@ -18,8 +18,8 @@
 
 <!-- home content -->
 <md-content layout-padding layout="column" >
-  <div ng-controller="HomeController as ctrl" layout="column" ng-cloak style="min-height: 70% !important;" layout-align="center">
-    <div ng-if="isAuthenticated()" >
+  <div ng-controller="HomeController" layout="column" ng-cloak style="min-height: 70% !important;" layout-align="center">
+    <div ng-hide="!isAuthenticated()" >
         <div layout="row" id="searchContent" >
           <md-icon>search</md-icon>
           <input autofocus type="text" id="searchBox" ng-model="query_string" ng-enter="submitSearch()" placeholder="Ex. Lacerda OR coach:mlacerda">

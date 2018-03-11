@@ -45,7 +45,7 @@ app.controller('HomeController', ['$scope', '$http', '$auth', '$q', '$log', '$re
 
       $scope.isAuthenticated = function() {
         return $auth.isAuthenticated();
-      };      
+      };
 
       function keyPress(event) {
         $log.info('Goto search page ' + text);
@@ -53,7 +53,7 @@ app.controller('HomeController', ['$scope', '$http', '$auth', '$q', '$log', '$re
       }
 
       $scope.submitSearch = function() {
-        $log.info("submit Query");
+        $log.info("submit Query: " + $scope.query_string);
         $location.path('/search/' + $scope.query_string);
       }
 

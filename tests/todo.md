@@ -7,6 +7,7 @@ ok * add infinit scroll
 * profile: config responsible layout
 * profile: add my people connections - my team (connect by stack, tech affinity)
 * stop infinite scrill for last page
+* infinite scroll not work when page is too low
 * add bower
 * add cucumber for api
 * add cucumber for end 2 end
