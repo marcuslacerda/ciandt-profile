@@ -120,6 +120,27 @@ skill = api.model('skill', {
     'endorsementsCount': fields.Integer(required=True, description='Total of edorsements')
 })
 
+strength = api.model('strength', {
+    'login': fields.String(readOnly=True, description='The unique identifier'),
+    'name': fields.String(required=True, description='Full name'),
+    'telephone': fields.String(required=True, description='Public telephone'),
+    'role': fields.Nested(api.model('RoleData', {
+        'code': fields.Integer(
+            description=u'code of role',
+            required=False,
+        ),
+        'name': fields.String(
+            description=u'name of role',
+            required=True,
+        ),
+    })),    
+    'total': fields.Integer(readOnly=True, description='Total of points'),
+    'skill': fields.Integer(required=True, description='Points about skill evaluation'),
+    'award': fields.Integer(required=True, description='Points about awards'),
+    'endorsement': fields.Integer(required=True, description='Points about endorsement'),
+})
+
+
 repository = Repository(app.config)
 
 @api.route('/_search')
@@ -131,7 +152,7 @@ class PeopleSearch(Resource):
     @api.marshal_list_with(people)
     def post(self, user):
         """List all people."""
-        print request.json
+        # print request.json
 
         return repository.search_by_query(query=request.json)
 
@@ -186,6 +207,35 @@ class PeopleSkill(Resource):
         skill.sort(key=lambda x:x['endorsementsCount'], reverse=True)
 
         return skill
+
+@api.route('/strength/<login>')
+class PeopleStrength(Resource):
+    """Shows a list of skills"""
+    @api.doc(security='oauth2')
+    @security.login_authorized
+    @api.response(404, 'People not found')
+    @api.marshal_with(strength)
+    def get(self, user, login):
+        """List Person's skills."""
+        query = {"query": {"match": {"login": login}}}
+        strength = repository.search_by_query(query=query, index='profile', doc_type='strength', sort="login.keyword")
+        if strength:
+            return strength[0]
+
+@api.route('/ranking')
+class PeopleRanking(Resource):
+    """Shows a list of skills"""
+    @api.doc(security='oauth2')
+    @security.login_authorized
+    @api.marshal_list_with(strength)
+    def post(self, user):
+        """List Person's skills."""
+        query = request.json
+
+        print query
+
+        return repository.search_by_query(query=query, index='profile', doc_type='strength', sort="total:desc")
+
 
 @api.route('/')
 class PeopleList(Resource):

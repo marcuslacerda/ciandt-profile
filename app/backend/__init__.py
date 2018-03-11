@@ -35,6 +35,13 @@ app.config['ELASTICSEARCH_URL'] = util.get_environ(app.config, 'ELASTICSEARCH_UR
 app.config['ELASTICSEARCH_USER'] = os.environ.get('ELASTICSEARCH_USER')
 app.config['ELASTICSEARCH_PASS'] = os.environ.get('ELASTICSEARCH_PASS')
 
+
+################
+#### swager ####
+################
+# app.config.SWAGGER_UI_JSONEDITOR = True
+
+
 ########################
 #### logging config ####
 ########################

@@ -42,6 +42,8 @@
                 swaggerUi.api.clientAuthorizations.add("oauth2", new SwaggerClient.ApiKeyAuthorization("Authorization", key, "header"));
               }
             });
+
+            $("#auth_input").trigger("change");
         });
 
     </script>
@@ -64,7 +66,7 @@
 <body class="swagger-section">
     <div id="header">
         <div class="swagger-ui-wrap">
-            <a id="logo"><span class="logo__title">CI&T OPEN API - DOCUMENTATION V1</span></a>
+            <a id="logo"><span class="logo__title">Profile OPEN API - DOCUMENTATION V1 <a href="/#">(voltar...)</a></span></a>
         </div>
     </div>
     <div id="api-auth-session">
@@ -72,7 +74,7 @@
           <div id="auth_container"></div>
           <span>Put here your oauth Authorization code </span>
           <br/>
-          <input name="auth_input" id="auth_input" placeholder="oauth access_token" size="100"/>
+          <input name="auth_input" id="auth_input" value="{{session['jwt']}}" placeholder="oauth access_token" size="100"/>
       </form>
     </div>
     <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>

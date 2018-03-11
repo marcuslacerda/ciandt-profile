@@ -71,6 +71,10 @@ md-toast.error .md-toast-content {
   background: #b9b8b8;
 }
 
+#awards img {
+  margin: 5px
+}
+
 .image-profile {
   margin: 5px;
   width: 100px;
@@ -84,6 +88,7 @@ md-toast.error .md-toast-content {
 
   #footer span{
     font-size: 24px;
+    color: white
   }
 
   #footer a {

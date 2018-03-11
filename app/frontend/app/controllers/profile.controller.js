@@ -11,24 +11,27 @@ app.controller('ProfileController', function($scope, $auth, $stateParams, Accoun
         { login : '@login' },
         {
           skillList : { method : 'GET', params : {action : 'skill'}, isArray: true },
-          stackList : { method : 'GET', params : {action : 'stack'}, isArray: true }
+          stackList : { method : 'GET', params : {action : 'stack'}, isArray: true },
+          strength : { method : 'GET', params : {action : 'strength'}}
         }
     );
 
     User.get({login:$scope.key}, function(data){
-      // console.log(data)
       $scope.user = data;
     });
 
-    //
     ProfileAPI.skillList({login:$scope.key}, function(data) {
-      console.log(data)
       $scope.skills = data;
     })
 
     ProfileAPI.stackList({login:$scope.key}, function(data) {
-      console.log(data)
       $scope.stacks = data;
+    })
+
+    ProfileAPI.strength({login:$scope.key}, function(data) {
+      console.log('return strentgh profile')
+      console.log(data)
+      $scope.strength = data;
     })
 
     $scope.imageProfile = function(person) {
@@ -46,7 +49,7 @@ app.controller('ProfileController', function($scope, $auth, $stateParams, Accoun
     }
 
     $scope.tops = function(skill) {
-      return skill['skillLevel'] >= 3 && skill.endorsementsCount > 1
+      return (skill['skillLevel'] >= 3 && skill.endorsementsCount > 0)
     }
 
   });

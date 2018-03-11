@@ -2,6 +2,7 @@
 from backend import logger, app
 from utils import security
 from flask import request
+from flask import session
 from flask_restplus import Namespace, Resource, fields
 from flask import jsonify
 import requests
@@ -80,6 +81,9 @@ class GoogleProvider(Resource):
             }
 
             jwt = security.create_token(payload)
+
+            # using on swagger ui
+            session['jwt'] = 'Bearer ' + jwt
             return jsonify(token=jwt)
         else:
             return not_authorized(403, 'Invalid domain. Please sign in with @ciandt.com acccount')

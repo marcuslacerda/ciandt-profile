@@ -118,6 +118,14 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
           loginRequired: loginRequired
         }
       })
+      .state('ranking', {
+        url: '/ranking',
+        templateUrl: 'partials/ranking.html',
+        controller: 'RankingController',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
       .state('search', {
         url: '/search/:key',
         templateUrl: 'partials/search.html',

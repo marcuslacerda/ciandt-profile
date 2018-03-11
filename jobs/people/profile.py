@@ -22,6 +22,12 @@ class Profile(object):
         query = '{"query": {"match_all": {}}}'
         return self.es.search(index=index, doc_type=doc_type, body=query, size=10000)
 
+    def find_ativos(self):
+        """Retrieve all documents."""
+        query = '{"query": {"match": {"status": "A"}}}'
+        return self.es.search(index=index, doc_type=doc_type, body=query, size=10000)
+
+
     def save(self, doc, refresh=False):
         """Save profile document. Create template if it not exists."""
         # database.create_template_if_notexits(self.es, __file__, index)

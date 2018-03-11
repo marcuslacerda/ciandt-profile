@@ -1,5 +1,7 @@
+google-api-python-client
 requests
 elasticsearch
+httplib2
 python-dotenv
 lxml
 PyYAML

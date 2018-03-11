@@ -1,16 +1,10 @@
 <md-content class="md-padding" layout="row" layout-wrap>
-  <div id="searchContent">
-      <div layout="row" style="width:100%;height:100%;">
-        <md-icon>search</md-icon>
-        <input type="text" id="searchBox" ng-model="query_string" ng-enter="submitSearch()" placeholder="Search">
-    </div>
-  </div>
   <div layout="row" layout-wrap infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled='busy'>
     <div class="profile-card" ng-repeat="person in items" >
       <md-card style="width: 350px; height: 250px">
          <md-card-title ng-click="show(person)">
            <md-card-title-text>
-             <span class="md-title">[[person.name]]</span>
+             <span class="md-title">([[$index+1]])[[person.name]]</span>
            </md-card-title-text>
          </md-card-title>
 
@@ -27,7 +21,7 @@
          </md-card-content>
          <md-divider></md-divider>
          <md-card-actions layout="row" layout-align="left center">
-           <span class="md-caption">Tech Strength: <b>2.345</b></span>
+           <span class="md-caption">Tech Strength: <b>[[person.total]]</b></span>
            <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
              <md-icon>plus_one</md-icon>
            </md-button>

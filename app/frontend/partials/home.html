@@ -17,12 +17,12 @@
 </div>
 
 <!-- home content -->
-<md-content layout-padding layout="column"   >
+<md-content layout-padding layout="column" >
   <div ng-controller="HomeController as ctrl" layout="column" ng-cloak style="min-height: 70% !important;" layout-align="center">
-    <div>
+    <div ng-if="isAuthenticated()" >
         <div layout="row" id="searchContent" >
           <md-icon>search</md-icon>
-          <input autofocus type="text" id="searchBox" ng-model="query_string" ng-enter="submitSearch()" placeholder="Search like login:mlacerda OR coach:mlacerda">
+          <input autofocus type="text" id="searchBox" ng-model="query_string" ng-enter="submitSearch()" placeholder="Ex. Lacerda OR coach:mlacerda">
       </div>
     </div>
 
@@ -62,23 +62,22 @@
 
   </div>
 
-  <md-toolbar id="footer" class="md-medium-tall">
-    <div layout="column" flex>
-      <div class="footer-links" layout="row" layout-align="space-around start">
-        <div layout="column">
+    <div id="footer" layout="column" flex>
+      <div class="footer-links" layout="row" layout-xs="column" layout-align="space-around start">
+        <div layout="column" style="margin: 20px">
           <span>Another Tools</span>
           <a href="http://stack-ciandt.appspot.com/" target="_blank">Stack</a>
           <a href="https://techgallery.ciandt.com" target="_blank">Tech Gallery</a>
           <a href="https://techanalytics.ciant.com" target="_blank">Tech Analytics</a>
         </div>
 
-        <div layout="column">
+        <div layout="column" style="margin: 20px">
           <span>Profile</span>
-          <a href="/#/search">Search</a>
+          <a href="/#/ranking">Leaderboard</a>
           <a href="/api">API</a>
         </div>
 
-        <div layout="column">
+        <div layout="column" style="margin: 20px">
           <span>Follow Us</span>
           <a href="https://github.com/marcuslacerda/profile-gallery" target="_blank">GitHub</a>
           <a href="https://ciandt-archs.slack.com" target="_blank">Slack Channel</a>
@@ -86,5 +85,4 @@
         </div>
       </div>
     </div>
-  </md-toolbar>
 </md-content>

@@ -43,6 +43,10 @@ app.controller('HomeController', ['$scope', '$http', '$auth', '$q', '$log', '$re
         }
       }
 
+      $scope.isAuthenticated = function() {
+        return $auth.isAuthenticated();
+      };      
+
       function keyPress(event) {
         $log.info('Goto search page ' + text);
         console.log(event.keyCode + ' - ' + event.altKey);
