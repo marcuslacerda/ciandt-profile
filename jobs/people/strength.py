@@ -22,6 +22,12 @@ class Strength(object):
         query = '{"query": {"match_all": {}}}'
         return self.es.search(index=index, doc_type=doc_type, body=query, size=10000)
 
+    def find_ranking(self):
+        """Retrieve all documents."""
+        query = '{"sort": [{"total": {"order": "desc"}}],"query": {"match_all": {}}}'
+        return self.es.search(index=index, doc_type=doc_type, body=query, size=10000)
+
+
 
     def save(self, doc, refresh=False):
         """Save profile document. Create template if it not exists."""

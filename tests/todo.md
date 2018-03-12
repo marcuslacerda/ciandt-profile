@@ -26,3 +26,4 @@ ok * add infinit scroll
 * google auth integrations
 * better search features - like Marcus Lacerda ou CPS AND coach:mlacerda
 * profile strenght gamification
+* add feature => redirect after login

@@ -27,15 +27,14 @@
          </md-card-content>
          <md-divider></md-divider>
          <md-card-actions layout="row" layout-align="left center">
-           <span class="md-caption">Tech Strength: <b>2.345</b></span>
            <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
              <md-icon>plus_one</md-icon>
            </md-button>
-           <md-button class="md-icon-button" aria-label="People" ng-click="show(person)">
-             <md-icon>people</md-icon>
+           <md-button class="md-icon-button" aria-label="Gift">
+             <md-icon>card_giftcard</md-icon>
            </md-button>
-           <md-button  style="overflow: inherit;" class="md-icon-button badge1" data-badge="[[item.like_count]]" aria-label="Favorite" ng-click="like(item)">
-             <md-icon ng-class="item.like_count > 0 ? 'selected' : 'normal'" aria-label="Favorite">favorite</md-icon>
+           <md-button  style="overflow: inherit;" class="md-icon-button badge1" data-badge="[[person.like_count]]" aria-label="Favorite" ng-click="like(person)">
+             <md-icon ng-class="person.like_count > 0 ? 'selected' : 'normal'" aria-label="Favorite">favorite</md-icon>
            </md-button>
            <div layout="column" layout-align="center center" ng-show="item.last_activity_user != null">
              <span md-colors="{color:'Grey'}" class="md-caption" title="Last updated by [[item.last_activity_user]]">last activity</span>

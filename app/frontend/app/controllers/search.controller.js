@@ -56,6 +56,15 @@ app.controller('SearchController', ['$scope', '$http', '$auth', '$q', '$log', '$
       $location.path("/profile/" + person.login);
     }
 
+    $scope.like = function(person) {
+      $log.info(person)
+      if (!person.like_count) {
+        person.like_count = 1;
+      } else {
+        person.like_count += 1;
+      }
+    }
+
     $scope.loadMore = function() {
       // this is a safeguard; the callback shouldn't actually be called
       if ($scope.busy) {

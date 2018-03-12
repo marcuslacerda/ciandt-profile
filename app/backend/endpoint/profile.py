@@ -27,6 +27,7 @@ people = api.model('People', {
     'bp': fields.String(required=False, description='Business partner from HR'),
     'birthday': fields.Date(required=True, description='Birthday'),
     'telephone': fields.String(required=True, description='Public telephone'),
+    'ranking': fields.Integer(required=True, description='Position on leaderboard'),
     'area': fields.Nested(api.model('AreaData', {
         'code': fields.Integer(
             description=u'code of area',
@@ -124,6 +125,7 @@ strength = api.model('strength', {
     'login': fields.String(readOnly=True, description='The unique identifier'),
     'name': fields.String(required=True, description='Full name'),
     'telephone': fields.String(required=True, description='Public telephone'),
+    'ranking': fields.String(required=True, description='Position on leaderboard'),    
     'role': fields.Nested(api.model('RoleData', {
         'code': fields.Integer(
             description=u'code of role',
@@ -133,7 +135,7 @@ strength = api.model('strength', {
             description=u'name of role',
             required=True,
         ),
-    })),    
+    })),
     'total': fields.Integer(readOnly=True, description='Total of points'),
     'skill': fields.Integer(required=True, description='Points about skill evaluation'),
     'award': fields.Integer(required=True, description='Points about awards'),

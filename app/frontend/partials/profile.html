@@ -14,9 +14,9 @@
           <span class="md-subhead">pontos</span>
         </div>
         <div>
-          <span class="md-subhead">Ranking></span>
-          <span class="ranking">32</span>
-          <a href="/#/ranking">Ver ranking</a>
+          <span class="md-subhead">Posição</span>
+          <span class="numberCircle"><span>[[strength.ranking]]</span></span>
+          <a href="/#/ranking">Ver ranking...</a>
         </div>
       </div>
     </div>
@@ -24,26 +24,36 @@
       <img ng-src="[[imageAward(item.name)]]" hint="[[item.description]]" ng-repeat="item in user.awards" />
     </div>
     <div layout="row">
-      <div id="skills" layout="column" flex="70">
-        <span class="md-title">Skill & Endorsement</span>
+      <div id="skills" layout="column" flex="60">
+        <div layout="row" layout-align="left center" style="min-height: 40px;">
+          <span flex="70" class="md-title">Skill & Endorsement</span>
+          <div layout="row" layout-align="left center">
+            <md-button ng-href="[['https://techgallery.ciandt.com/#/people/' + user.login]]" target="_blank" class="md-icon-button" aria-label="People" hint="Ver detalhes">
+              <md-icon>help</md-icon>
+            </md-button>
+            <span><a href="[['https://techgallery.ciandt.com/#/people/' + user.login]]" target="_blank">saiba mais..</a></span>
+          </div>
+        </div>
         <md-divider></md-divider>
         <br>
         <div id="tech-item" layout="row" layout-align="left center" ng-repeat="skill in skills | filter: tops">
-          <span flex="20">[[skill.technologyName]]</span>
+          <span flex="35">[[ skill.technologyName | limitTo: 20 ]][[skill.technologyName.length > 20 ? '...' : '']]</span>
           <div flex="20" layout-align="left center">
-            <img src="assets/icon/yellow-rating-star-24.png" ng-repeat="n in [] | range:skill.skillLevel">
+            <img style="height: 20px; width: 20px" src="assets/icon/yellow-rating-star-24.png" ng-repeat="n in [] | range:skill.skillLevel">
           </div>
           <md-button class="md-icon-button" aria-label="People" hint="Agradecer">
             <md-icon>plus_one</md-icon>
           </md-button>
-          <div flex="50">
+          <div flex="35">
             <!-- <img class="endorsers-image" ng-src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50" uibtooltip="Junior Adherbal Gomes da Silva" src="https://lh3.googleusercontent.com/-wvSbw9cDnUo/AAAAAAAAAAI/AAAAAAAAAC4/HGa_wsuXXgg/photo.jpg?sz=50"> -->
-            <span>Já foi endossado por [[skill.endorsementsCount]] pessoas</span>
+            <span>Endossado por [[skill.endorsementsCount]] pessoas</span>
           </div>
         </div>
       </div>
-      <div id="stacks" layout="column" flex="30">
-        <span class="md-title">Owner / Stack</span>
+      <div id="stacks" layout="column" flex="40">
+        <div layout="row" layout-align="left center" style="min-height: 40px;">
+          <span class="md-title">Stack</span>
+        </div>
         <md-divider></md-divider>
         <br>
         <div id="stack-item" layout="column" ng-repeat="stack in stacks">
@@ -54,7 +64,7 @@
     </div>
   </div>
   <div id="history" layout="column" flex="20" hide-xs	>
-      <span class="md-title">History (last 10)</span>
+      <span class="md-title">Últimas informações:</span>
       <br>
       <span class="md-subhead">Endorse: por Felipe Osti em JIRA <b>(+5 pontos)</b></span>
       <span class="md-subhead">Awards: recebeu 10 Years > +50 pontos</span>

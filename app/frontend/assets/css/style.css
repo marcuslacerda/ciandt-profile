@@ -16,6 +16,22 @@
     outline:none;
 }
 
+.badge1[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:-3px;
+   right:-3px;
+   font-size:.7em;
+   background:#e0e0e0;
+   color:gray;
+   width:18px;
+   height:18px;
+   text-align:center;
+   border: none;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
 
 #loading-bar .bar {
   background: black;
@@ -39,6 +55,8 @@ md-toast.error .md-toast-content {
   width: 48px;
   height: 48px
 }
+
+
 .autocomplete-custom-template li {
   border-bottom: 1px solid #ccc;
   height: auto;
@@ -68,7 +86,7 @@ md-toast.error .md-toast-content {
 }
 
 #profile {
-  background: #b9b8b8;
+  background: #E0E0E0;
 }
 
 #awards img {
@@ -122,3 +140,23 @@ md-toast.error .md-toast-content {
   [x-ng-click] {
       cursor: pointer;
   }
+
+  .numberCircle {
+    display:inline-block;
+    line-height:0px;
+
+    border-radius:50%;
+    border:2px solid;
+
+    font-size:12px;
+}
+
+.numberCircle span {
+    display:inline-block;
+
+    padding-top:50%;
+    padding-bottom:50%;
+
+    margin-left:8px;
+    margin-right:8px;
+}
