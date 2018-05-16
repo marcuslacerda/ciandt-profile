@@ -1,17 +1,16 @@
 version: '2'
 services:
     people-elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.2
         container_name: people-elasticsearch
         # ports:
         #   - "9200:9200"
         #   - "9300:9300"
         # uncomment this section to have elasticsearch data persisted to a volume
         volumes:
-         - ~/data:/usr/share/elasticsearch/data
+          - ./conf/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+          - ~/data:/usr/share/elasticsearch/data
         environment:
-          - xpack.security.enabled=false
-          - xpack.monitoring.enabled=false
           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         mem_limit: 1g
     # uncomment if you don't want to use google app engine
@@ -28,7 +27,7 @@ services:
     #    ports:
     #        - "5002:5000"
     people-kibana:
-        image: docker.elastic.co/kibana/kibana:6.2.1
+        image: docker.elastic.co/kibana/kibana-oss:6.2.2
         container_name: people-kibana
         depends_on:
             - people-elasticsearch
@@ -36,9 +35,6 @@ services:
             # - "5601:5601"
         environment:
             - ELASTICSEARCH_URL=http://people-elasticsearch:9200
-            - xpack.security.enabled=false
-            - xpack.monitoring.enabled=false
-            - xpack.reporting.enabled=false
         # volumes:
         #    - ./conf/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     people-nginx:
