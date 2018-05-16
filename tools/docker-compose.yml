@@ -9,7 +9,7 @@ services:
         # uncomment this section to have elasticsearch data persisted to a volume
         volumes:
           - ./conf/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-          - ~/data:/usr/share/elasticsearch/data
+          - /home/profile/data:/usr/share/elasticsearch/data
         environment:
           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         mem_limit: 1g
