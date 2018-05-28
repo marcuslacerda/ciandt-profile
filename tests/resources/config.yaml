@@ -5,7 +5,7 @@ people:
     pass:
   gateway:
     host: https://wsgateway.cit.com.br
-    app_token: Blpy2nNXnjya
+    app_token: 
 
 profile:
   elasticsearch:
