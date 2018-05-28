@@ -9,3 +9,4 @@ PyJWT
 PyYAML
 lxml
 mock==2.0.0
+enum34
