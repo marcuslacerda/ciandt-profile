@@ -35,7 +35,7 @@ class People(object):
               login: Username for build url https://people.cit.com.br/profile/+login
         """
         url = '%s/profile/%s' % (self.people_host, login)
-        logger.error(self.username)
+        logger.error('user=' % self.username)
         logger.error(self.password)
         response = requests.get(url=url, auth=HTTPBasicAuth(self.username, self.password))
         # logger.debug('user %s and pass %s' % (self.username, self.password))
