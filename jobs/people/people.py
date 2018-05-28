@@ -35,11 +35,17 @@ class People(object):
               login: Username for build url https://people.cit.com.br/profile/+login
         """
         url = '%s/profile/%s' % (self.people_host, login)
+        logger.error(self.username)
+        logger.error(self.password)
         response = requests.get(url=url, auth=HTTPBasicAuth(self.username, self.password))
         # logger.debug('user %s and pass %s' % (self.username, self.password))
 
         # Response
         # print response.status_code
+        logger.debug(url)
+        logger.debug(response.status_code)
+        if response.status_code == 404:
+            return None
         if response.status_code != 200:
             logger.error("fail to load project name for %s. Check people username and password" % login)
             return None
@@ -115,6 +121,7 @@ class People(object):
 
         # Response
         logger.debug(url)
+        logger.debug(response.status_code)
         if response.status_code != 200:
             logger.error("fail to load project name for %s. Check people username and password" % login)
             return None
@@ -171,7 +178,7 @@ class People(object):
         token = self.config.get('PEOPLE_GATEWAY_APP_TOKEN')
         headers = {'app_token': token}
 
-        url = '%s/cit/api/v2/people' % self.config.get('PEOPLE_GATEWAY_HOST')
+        url = '%s/cit/api/v2/people?status=I' % self.config.get('PEOPLE_GATEWAY_HOST')
 
         logger.debug('Retreive all users')
         logger.debug('url = %s' %url)
