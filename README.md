@@ -1,7 +1,6 @@
 # Introduction
 Profile is a powerfull search engine to search people and their connections. .
 
-[TODO: figure show people search and connection]
 
 ## Prerequisites
 [Google Cloud SDK][gcloud] used do knowledge map crawler
