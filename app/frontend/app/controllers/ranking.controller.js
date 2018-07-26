@@ -18,7 +18,7 @@ app.controller('RankingController', ['$scope', '$http', '$auth', '$q', '$log', '
       $log.info('query from : ' + from);
 
       var query = {
-        "from" : from, "size" : 6,
+        "from" : from, "size" : 12,
         "query": {"match_all": {}}
       }
 
