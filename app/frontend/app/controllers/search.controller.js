@@ -21,7 +21,7 @@ app.controller('SearchController', ['$scope', '$http', '$auth', '$q', '$log', '$
       $log.info('query: ' + $scope.query_string);
 
       var query = {
-        "from" : from, "size" : 6,
+        "from" : from, "size" : 12,
         "query": {
           "query_string": {
             "query": text + " AND status:A"
