@@ -1,13 +1,14 @@
 <joblist>
   <job>
-    <description>Load coach and pdm data</description>
+    <description></description>
     <executionEnabled>true</executionEnabled>
-    <id>bbb77414-fc0d-4db9-bcbb-9238ee5db5db</id>
+    <id>b8a7acd6-5833-4bfe-9895-4f3430ba41ab</id>
     <loglevel>INFO</loglevel>
-    <name>Load Detail Information</name>
+    <name>Update Rescission</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
     <schedule>
       <month month='*' />
-      <time hour='02' minute='00' seconds='0' />
+      <time hour='04' minute='00' seconds='0' />
       <weekday day='*' />
       <year year='*' />
     </schedule>
@@ -15,17 +16,17 @@
     <sequence keepgoing='false' strategy='node-first'>
       <command>
         <description>clone scripts</description>
-        <exec>rm -rf profile &amp;&amp; git clone https://github.com/marcuslacerda/profile.git</exec>
+        <exec>rm -rf ciandt-profile &amp;&amp; git clone https://github.com/marcuslacerda/ciandt-profile.git</exec>
       </command>
       <command>
-        <description>script load coach</description>
-        <script><![CDATA[cd profile/jobs
+        <description>script load people</description>
+        <script><![CDATA[cd ciandt-profile/jobs
 echo "======= STARTING SCRIPT ======="
-python -u script_load_detail.py --logging_level INFO
+python -u script_rescission.py --logging_level INFO
 echo "======= SCRIPT FINISHED ======="]]></script>
         <scriptargs />
       </command>
     </sequence>
-    <uuid>bbb77414-fc0d-4db9-bcbb-9238ee5db5db</uuid>
+    <uuid>b8a7acd6-5833-4bfe-9895-4f3430ba41ab</uuid>
   </job>
 </joblist>

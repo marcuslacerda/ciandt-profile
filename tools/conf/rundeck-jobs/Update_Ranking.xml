@@ -1,0 +1,32 @@
+<joblist>
+  <job>
+    <description></description>
+    <executionEnabled>true</executionEnabled>
+    <id>710b1987-ed8b-4c76-af28-70692f52e68c</id>
+    <loglevel>INFO</loglevel>
+    <name>Update Ranking</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <schedule>
+      <month month='*' />
+      <time hour='07' minute='00' seconds='0' />
+      <weekday day='*' />
+      <year year='*' />
+    </schedule>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>clone scripts</description>
+        <exec>rm -rf ciandt-profile &amp;&amp; git clone https://github.com/marcuslacerda/ciandt-profile.git</exec>
+      </command>
+      <command>
+        <description>script load people</description>
+        <script><![CDATA[cd ciandt-profile/jobs
+echo "======= STARTING SCRIPT ======="
+python -u script_ranking.py --logging_level INFO
+echo "======= SCRIPT FINISHED ======="]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>710b1987-ed8b-4c76-af28-70692f52e68c</uuid>
+  </job>
+</joblist>
